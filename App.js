@@ -25,6 +25,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="ListCourses" component={Browse} />
+
         <Stack.Screen name="CourseDetail" component={CourseDetail} />
       </Stack.Navigator>
     </NavigationContainer>
