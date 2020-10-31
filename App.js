@@ -10,13 +10,13 @@ import ChangePassword from "./src/componennts/AccountManagement/Profile/change-p
 import EditProfile from "./src/componennts/AccountManagement/Profile/edit-profile";
 import UserProfile from "./src/componennts/AccountManagement/Profile/user-profile";
 import Home from "./src/componennts/Main/Home/home";
+
 import ListCourses from "./src/componennts/Courses/ListCourses/list-courses";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CourseDetail from "./src/componennts/CourseDetail/course-detail";
 import Downloads from "./src/componennts/Main/Downloads/downloads";
 import Browse from "./src/componennts/Main/Browse/browse";
-
 
 const Stack = createStackNavigator();
 
@@ -34,6 +34,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     marginTop: 24,
   },
 });
