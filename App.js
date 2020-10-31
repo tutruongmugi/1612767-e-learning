@@ -17,6 +17,7 @@ import CourseDetail from "./src/componennts/CourseDetail/course-detail";
 import Downloads from "./src/componennts/Main/Downloads/downloads";
 import Browse from "./src/componennts/Main/Browse/browse";
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
