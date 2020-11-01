@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
 
-function ListCoursesItem({ item }) {
+function PathsItem({ item }) {
   return (
     <TouchableOpacity
       style={styles.item}
@@ -18,19 +11,18 @@ function ListCoursesItem({ item }) {
     >
       <Image
         style={styles.image}
-        source={require("../../../../assets/2.png")}
+        source={{
+          uri:
+            "https://codelearn.io/Upload/Blog/nhung-loi-thuong-gap-khi-lap-trinh-java-63725972059.7478.jpg",
+        }}
       />
-      <View style={styles.text}>
+      <View>
         <Text>{item.title}</Text>
-        <Text style={styles.darkText}>{item.author}</Text>
-        <Text
-          style={styles.darkText}
-        >{`${item.level} . ${item.released} . ${item.duration}`}</Text>
+        <Text style={styles.darkText}>{item.duration}</Text>
       </View>
     </TouchableOpacity>
   );
 }
-
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
@@ -43,12 +35,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50,
   },
-  text: {
-    marginLeft: 10,
-    justifyContent: "flex-start",
-  },
   darkText: {
     color: "darkgray",
   },
 });
-export default ListCoursesItem;
+export default PathsItem;

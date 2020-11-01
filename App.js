@@ -17,6 +17,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import CourseDetail from "./src/componennts/CourseDetail/course-detail";
 import Downloads from "./src/componennts/Main/Downloads/downloads";
 import Browse from "./src/componennts/Main/Browse/browse";
+import Search from "./src/componennts/Main/Search/search";
 
 const Stack = createStackNavigator();
 
@@ -24,8 +25,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ListCourses" component={Browse} />
-
+        <Stack.Screen name="ListCourses" component={Search} />
         <Stack.Screen name="CourseDetail" component={CourseDetail} />
       </Stack.Navigator>
     </NavigationContainer>

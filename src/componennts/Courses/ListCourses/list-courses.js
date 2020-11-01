@@ -9,68 +9,7 @@ import {
 } from "react-native";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
-function ListCourses() {
-  const courses = [
-    {
-      title: "mobile",
-      data: [
-        {
-          id: 1,
-          title: "react-native",
-          author: "kuro",
-          level: "Advanced",
-          released: "May 2, 2020",
-          duration: "30 hours",
-        },
-        {
-          id: 2,
-          title: "IOS",
-          author: "yuuki",
-          level: "Beginner",
-          released: "May 5, 2020",
-          duration: "35 hours",
-        },
-        {
-          id: 3,
-          title: "Android",
-          author: "Master",
-          level: "Beginner",
-          released: "May 5, 2020",
-          duration: "25 hours",
-        },
-      ],
-    },
-    {
-      title: "Web",
-      data: [
-        {
-          id: 1,
-          title: "react-native",
-          author: "kuro",
-          level: "Advanced",
-          released: "May 2, 2020",
-          duration: "30 hours",
-        },
-        {
-          id: 2,
-          title: "IOS",
-          author: "yuuki",
-          level: "Beginner",
-          released: "May 5, 2020",
-          duration: "35 hours",
-        },
-        {
-          id: 3,
-          title: "Android",
-          author: "Master",
-          level: "Beginner",
-          released: "May 5, 2020",
-          duration: "25 hours",
-        },
-      ],
-    },
-  ];
-
+function ListCourses({ courses }) {
   const searchView = () => {
     return (
       <View style={{ flexDirection: "row" }}>
@@ -94,9 +33,9 @@ function ListCourses() {
       <FlatList
         data={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
-        ListHeaderComponent={() => searchView()}
+        // ListHeaderComponent={() => searchView()}
       />
-      <SectionList
+      {/* <SectionList
         sections={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         renderSectionHeader={({ section }) => (
@@ -104,7 +43,7 @@ function ListCourses() {
             <Text>{section.title}</Text>
           </View>
         )}
-      />
+      /> */}
     </View>
   );
 }
