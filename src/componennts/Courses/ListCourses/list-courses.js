@@ -8,26 +8,27 @@ import {
   Text,
 } from "react-native";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
-function ListCourses({ courses }) {
-  const searchView = () => {
-    return (
-      <View style={{ flexDirection: "row" }}>
-        <TextInput
-          style={{ flex: 1, borderWidth: 1, borderColor: "gray" }}
-          placeholder="Search text..."
-        />
-        <Button
-          onPress={() => {
-            console.log("search");
-          }}
-          title="Search"
-          styles={{ width: 60, height: 40 }}
-        />
-      </View>
-    );
-  };
-
+function ListCourses({ route }) {
+  // const searchView = () => {
+  //   return (
+  //     <View style={{ flexDirection: "row" }}>
+  //       <TextInput
+  //         style={{ flex: 1, borderWidth: 1, borderColor: "gray" }}
+  //         placeholder="Search text..."
+  //       />
+  //       <Button
+  //         onPress={() => {
+  //           console.log("search");
+  //         }}
+  //         title="Search"
+  //         styles={{ width: 60, height: 40 }}
+  //       />
+  //     </View>
+  //   );
+  // };
+  let courses = route.params.item;
   return (
     <View>
       <FlatList

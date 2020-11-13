@@ -34,6 +34,7 @@ function SearchForm() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    margin: 5,
   },
   textInput: {
     flex: 1,

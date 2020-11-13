@@ -7,7 +7,6 @@ import SectionPaths from "./SectionPaths/section-paths";
 function Home() {
   return (
     <ScrollView>
-      <ImageButton title="NEW RELEASES"></ImageButton>
       <SectionCourses title="Continue learning" />
       <SectionPaths title="Path" />
       <SectionCourses title="Channel" />

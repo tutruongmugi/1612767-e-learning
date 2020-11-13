@@ -1,9 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
 function SectionPathsItem({ item }) {
+  const OnPressedPath = () => {};
+
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={OnPressedPath}>
       <Image
         source={require("../../../../../assets/1.png")}
         style={styles.image}
@@ -12,7 +14,7 @@ function SectionPathsItem({ item }) {
         <Text>{item.title}</Text>
         <Text style={styles.darkText}>{item.duration}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({

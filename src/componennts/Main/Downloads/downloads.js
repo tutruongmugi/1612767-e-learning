@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList } from "react-native";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
 function Downloads() {
@@ -11,6 +11,8 @@ function Downloads() {
       level: "Advanced",
       released: "May 2, 2020",
       duration: "30 hours",
+      rate: 4.5,
+      rateCount: 1399,
     },
     {
       id: 2,
@@ -19,6 +21,8 @@ function Downloads() {
       level: "Beginner",
       released: "May 5, 2020",
       duration: "35 hours",
+      rate: 3,
+      rateCount: 509,
     },
     {
       id: 3,
@@ -27,13 +31,13 @@ function Downloads() {
       level: "Beginner",
       released: "May 5, 2020",
       duration: "25 hours",
+      rate: 4,
+      rateCount: 213,
     },
   ];
+  const OnPressedButtonMore = () => {};
   return (
     <View>
-      <View>
-        <Text>Downloads</Text>
-      </View>
       <FlatList
         data={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}

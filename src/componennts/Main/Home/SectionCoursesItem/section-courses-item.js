@@ -1,9 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import * as RootNavigation from "../../../../routes/navigations/root-navigation";
+import { Rating } from "react-native-elements";
 
 function SectionCoursesItem({ item }) {
+  const onPressSectionItem = () => {
+    RootNavigation.navigate("CourseDetail", { item: item });
+  };
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={onPressSectionItem}>
       <Image
         source={require("../../../../../assets/1.png")}
         style={styles.image}
@@ -14,15 +19,19 @@ function SectionCoursesItem({ item }) {
         <Text
           style={styles.darkText}
         >{`${item.level} . ${item.released} . ${item.duration}`}</Text>
+        <View style={styles.rate}>
+          <Rating imageSize={15} readonly startingValue={item.rate} />
+          <Text style={styles.darkText}>{` (${item.rateCount})`}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   item: {
     margin: 5,
-    width: 200,
+    width: 230,
     height: 200,
     backgroundColor: "lightgray",
   },
@@ -35,6 +44,11 @@ const styles = StyleSheet.create({
 
   text: {
     margin: 5,
+  },
+  rate: {
+    marginTop: 5,
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
 });
 

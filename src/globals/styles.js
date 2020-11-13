@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: 30,
     letterSpacing: 0.4,
-    color: "# #a6a6a6",
+    color: "#a6a6a6",
     marginBottom: 20,
     width: "80%",
     padding: 10,

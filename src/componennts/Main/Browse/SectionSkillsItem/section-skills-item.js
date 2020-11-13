@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 function SectionSkillsItem({ item }) {
+  const OnPressed = () => {};
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={OnPressed}>
       <Text>{item.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

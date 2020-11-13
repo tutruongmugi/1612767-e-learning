@@ -1,13 +1,18 @@
 import React from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import styles from "../../../globals/styles";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function Login() {
   const handleEmailInputChange = () => {};
   const handlePasswordInputChange = () => {};
-  const onPressedForgotPassword = () => {};
+  const onPressedForgotPassword = () => {
+    RootNavigation.navigate("ForgetPassword");
+  };
   const onPressedSignIn = () => {};
-  const onPressedSignUp = () => {};
+  const onPressedSignUp = () => {
+    RootNavigation.navigate("Register");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Sign In</Text>
