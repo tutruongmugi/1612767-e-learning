@@ -13,7 +13,9 @@ import * as RootNavigation from "../../../../routes/navigations/root-navigation"
 import SectionSkills from "../../../Main/Browse/SectionSkills/section-skills";
 
 function UserProfile() {
-  const OnPressedSignOut = () => {};
+  const OnPressedSignOut = () => {
+    RootNavigation.navigate("Login");
+  };
   const OnPressedChangePassword = () => {
     RootNavigation.navigate("ChangePassword");
   };
