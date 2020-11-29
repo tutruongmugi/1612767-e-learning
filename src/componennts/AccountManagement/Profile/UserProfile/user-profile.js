@@ -1,65 +1,66 @@
-import React from "react";
-import { Card } from "react-native-elements";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import styles from "../../../../globals/styles";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 import SectionSkills from "../../../Main/Browse/SectionSkills/section-skills";
+import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import { Image } from "react-native-elements";
 
 function UserProfile() {
-  const OnPressedSignOut = () => {
-    RootNavigation.navigate("Login");
-  };
-  const OnPressedChangePassword = () => {
-    RootNavigation.navigate("ChangePassword");
-  };
   const OnPressedEditProfile = () => {
+    console.log(authentication.user);
     RootNavigation.navigate("EditProfile");
   };
+  const { authentication } = useContext(AuthenticationContext);
+
   return (
     <View style={style1.container}>
-      <ScrollView>
-        <View style={style1.profileTitle}>
-          <Image
-            style={style1.image}
-            source={{
-              uri:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnawXcdwPn0r48TZ9H-e9g_RVOwgTJFY1XPg&usqp=CAU",
-            }}
-          />
-
-          <TouchableOpacity>
-            <Text onPress={OnPressedEditProfile}>Edit Profile</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ padding: 10 }}>
-          <Text style={style1.name}>Kuro Yuuki</Text>
-          <View>
-            <Text style={style1.name}>012345678</Text>
-          </View>
-          <Text style={style1.bio}>kuro@gmail.com</Text>
-          <Text style={style1.bio}>Light</Text>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity>
-            <Text style={styles.forgot} onPress={OnPressedChangePassword}>
-              Change Password
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text onPress={OnPressedSignOut}>SIGN OUT</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <SectionSkills title={"Interest"} />
-        </View>
-      </ScrollView>
+      <View style={style1.info}>
+        <Image
+          style={style1.image}
+          source={{
+            uri: "https://genshin.honeyhunterworld.com/img/char/keqing.png",
+          }}
+        />
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            alignSelf: "flex-end",
+            padding: 10,
+            fontWeight: "bold",
+          }}
+          onPress={OnPressedEditProfile}
+        >
+          <Text>EDIT</Text>
+        </TouchableOpacity>
+        <Text style={{ marginTop: 20, fontSize: 24 }}>
+          {authentication.user.fullName}
+        </Text>
+        <Text style={{ marginTop: 10, fontSize: 16 }}>0357004545</Text>
+        <Text style={{ marginTop: 10, fontSize: 16 }}>
+          {authentication.user.email}
+        </Text>
+      </View>
+      <View
+        style={{
+          padding: 10,
+          margin: 10,
+          backgroundColor: "#FFF",
+        }}
+      >
+        <Text style={{ fontSize: 16 }}>Skills</Text>
+        <Text
+          style={{
+            position: "absolute",
+            alignSelf: "flex-end",
+            padding: 10,
+            fontWeight: "bold",
+          }}
+        >
+          EDIT
+        </Text>
+        <SectionSkills />
+      </View>
     </View>
   );
 }
@@ -68,31 +69,23 @@ export default UserProfile;
 
 const style1 = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-
+    backgroundColor: "#F0F2F5",
+  },
+  info: {
     alignItems: "center",
-  },
-  profileTitle: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  avatar: {
-    width: "100%",
-    height: 200,
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  bio: {
-    fontSize: 18,
+    padding: 10,
+    margin: 10,
+    backgroundColor: "#FFF",
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 50 / 2,
+    width: 100,
+    height: 100,
+    borderRadius: 100 / 2,
     overflow: "hidden",
-    borderWidth: 2,
+    borderWidth: 1,
+    marginBottom: 5,
+  },
+  darkText: {
+    color: "#65676B",
   },
 });

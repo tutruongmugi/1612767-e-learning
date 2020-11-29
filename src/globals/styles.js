@@ -3,19 +3,19 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#F0F2F5",
   },
   logo: {
     fontWeight: "bold",
-    fontSize: 50,
-    color: "#000000",
+    fontSize: 35,
+    color: "#000",
     marginBottom: 40,
   },
   inputView: {
     width: "80%",
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#Fff",
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 50,
-    color: "#000000",
+    color: "#65676B",
   },
   forgot: {
     color: "#000000",
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   caption: {
-    fontSize: 30,
+    fontSize: 20,
     letterSpacing: 0.4,
-    color: "#a6a6a6",
+    color: "#65676B",
     marginBottom: 20,
     width: "80%",
     padding: 10,

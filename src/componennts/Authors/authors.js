@@ -7,7 +7,10 @@ function Authors({ authors }) {
     <View>
       <FlatList
         data={authors}
-        renderItem={({ item }) => <AuthorsItem item={item} />}
+        renderItem={({ item }) => <AuthorsItem key={item.id} item={item} />}
+        keyExtractor={(item, index) => {
+          return item.id.toString();
+        }}
       />
     </View>
   );

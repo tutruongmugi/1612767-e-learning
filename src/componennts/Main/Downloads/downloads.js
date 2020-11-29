@@ -1,46 +1,33 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { View, FlatList } from "react-native";
+import { CoursesContext } from "../../../provider/courses-provider";
+import { FavouritesContext } from "../../../provider/favourites-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
 function Downloads() {
-  const courses = [
-    {
-      id: 1,
-      title: "react-native",
-      author: "kuro",
-      level: "Advanced",
-      released: "May 2, 2020",
-      duration: "30 hours",
-      rate: 4.5,
-      rateCount: 1399,
-    },
-    {
-      id: 2,
-      title: "IOS",
-      author: "yuuki",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "35 hours",
-      rate: 3,
-      rateCount: 509,
-    },
-    {
-      id: 3,
-      title: "Android",
-      author: "Master",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "25 hours",
-      rate: 4,
-      rateCount: 213,
-    },
-  ];
   const OnPressedButtonMore = () => {};
+
+  const { favouriteCourses, addFavouriteCourse } = useContext(
+    FavouritesContext
+  );
+
+  const { courses } = useContext(CoursesContext);
+  useEffect(() => {
+    courses.map((course) => {
+      if (course.favourite === true) {
+        addFavouriteCourse(course.id);
+      }
+    });
+  }, []);
+
   return (
-    <View>
+    <View style={{ backgroundColor: "#F0F2F5" }}>
       <FlatList
-        data={courses}
-        renderItem={({ item }) => <ListCoursesItem item={item} />}
+        data={courses.filter((course) => favouriteCourses.includes(course.id))}
+        renderItem={({ item }) => <ListCoursesItem key={item.id} item={item} />}
+        keyExtractor={(item, index) => {
+          return item.id.toString();
+        }}
       />
     </View>
   );

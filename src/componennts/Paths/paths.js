@@ -7,7 +7,10 @@ function Paths({ paths }) {
     <View>
       <FlatList
         data={paths}
-        renderItem={({ item }) => <PathsItem item={item} />}
+        renderItem={({ item }) => <PathsItem key={item.id} item={item} />}
+        keyExtractor={(item, index) => {
+          return item.id.toString();
+        }}
       />
     </View>
   );

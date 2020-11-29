@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -7,44 +7,31 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import { PathsContext } from "../../../../provider/paths-provider";
 import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 
 function SectionPaths({ title }) {
-  const paths = [
-    {
-      id: 1,
-      title: "React",
-      duration: "12 courses",
-    },
-    {
-      id: 2,
-      title: "React-native",
-      duration: "6 courses",
-    },
-    {
-      id: 3,
-      title: "Angular",
-      duration: "16 courses",
-    },
-  ];
+  const { paths } = useContext(PathsContext);
 
   const renderListItems = (paths) => {
-    return paths.map((item) => <SectionPathsItem item={item} />);
+    return paths.map((item) => <SectionPathsItem key={item.id} item={item} />);
   };
   const OnPressed = () => {};
   return (
-    <View>
+    <View style={{ backgroundColor: "#F0F2F5" }}>
       <View style={styles.headerContainer}>
-        <Text>{title}</Text>
+        <Text style={styles.text}>{title}</Text>
         <TouchableOpacity style={styles.expand} onPress={OnPressed}>
-          <Text>See all</Text>
+          <Text style={styles.text}>See all</Text>
           <Image
             style={styles.image}
             source={require("../../../../../assets/icon-expand.png")}
           />
         </TouchableOpacity>
       </View>
-      <ScrollView horizontal={true}>{renderListItems(paths)}</ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+        {renderListItems(paths)}
+      </ScrollView>
     </View>
   );
 }
@@ -64,5 +51,8 @@ const styles = StyleSheet.create({
   },
   expand: {
     flexDirection: "row",
+  },
+  text: {
+    color: "#050505",
   },
 });

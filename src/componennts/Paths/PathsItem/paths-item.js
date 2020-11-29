@@ -1,42 +1,42 @@
 import React from "react";
-import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
-
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Image } from "react-native-elements";
 function PathsItem({ item }) {
   return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        console.log("something!");
-      }}
-    >
-      <Image
-        style={styles.image}
-        source={{
-          uri:
-            "https://codelearn.io/Upload/Blog/nhung-loi-thuong-gap-khi-lap-trinh-java-63725972059.7478.jpg",
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => {
+          console.log("something!");
         }}
-      />
-      <View>
-        <Text>{item.title}</Text>
-        <Text style={styles.darkText}>{item.duration}</Text>
-      </View>
-    </TouchableOpacity>
+      >
+        <Image source={{ uri: item.image }} style={styles.image} />
+        <View>
+          <Text style={{ color: "#000" }}>{item.title}</Text>
+          <Text style={styles.darkText}>{item.duration}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  item: {
-    flexDirection: "row",
-    margin: 5,
+  container: {
     borderBottomColor: "gray",
     borderBottomWidth: 1,
-    //ItemSeperatorComponent
+    flexDirection: "row",
+    backgroundColor: "#FFF",
+  },
+  item: {
+    margin: 5,
+    flexDirection: "row",
+    width: "95%",
   },
   image: {
     width: 100,
     height: 50,
   },
   darkText: {
-    color: "darkgray",
+    color: "#65676B",
   },
 });
 export default PathsItem;

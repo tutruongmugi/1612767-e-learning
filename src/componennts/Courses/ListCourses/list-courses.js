@@ -28,13 +28,19 @@ function ListCourses({ route }) {
   //     </View>
   //   );
   // };
-  let courses = route.params.item;
+  const params = route.params;
   return (
     <View>
+      <Text
+        style={{ fontSize: 20, color: "#000", padding: 4, fontWeight: "bold" }}
+      >
+        {params.title}
+      </Text>
       <FlatList
-        data={courses}
+        data={params.item}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         // ListHeaderComponent={() => searchView()}
+        keyExtractor={(item, index) => item + index}
       />
       {/* <SectionList
         sections={courses}

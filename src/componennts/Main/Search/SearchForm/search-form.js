@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { Card } from "react-native-paper";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-function SearchForm() {
+function SearchForm({ handleSearch, handleInputChange }) {
   const input = React.createRef();
   const [value, setValue] = useState("");
-  const handleSearch = () => {
-    setValue("");
-  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -21,13 +19,16 @@ function SearchForm() {
         ref={input}
         onChangeText={(value) => {
           setValue(value);
+          handleInputChange(value);
         }}
         placeholder="Search"
         style={styles.textInput}
       />
-      <TouchableOpacity style={styles.searchIcon} onPress={handleSearch}>
-        <Text>search</Text>
-      </TouchableOpacity>
+      <Ionicons
+        style={styles.searchIcon}
+        name="md-search"
+        onPress={handleSearch}
+      />
     </View>
   );
 }
@@ -42,8 +43,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
   },
   searchIcon: {
-    width: 60,
-    height: 40,
+    fontSize: 20,
+    padding: 5,
   },
 });
 export default SearchForm;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -9,51 +9,23 @@ import {
 } from "react-native";
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
+import { CoursesContext } from "../../../../provider/courses-provider";
 
 function Sectioncourses({ title }) {
-  const courses = [
-    {
-      id: 1,
-      title: "react-native",
-      author: "kuro",
-      level: "Advanced",
-      released: "May 2, 2020",
-      duration: "30 hours",
-      rate: 4.5,
-      rateCount: 1399,
-    },
-    {
-      id: 2,
-      title: "IOS",
-      author: "yuuki",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "35 hours",
-      rate: 3,
-      rateCount: 509,
-    },
-    {
-      id: 3,
-      title: "Android",
-      author: "Master",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "25 hours",
-      rate: 4,
-      rateCount: 213,
-    },
-  ];
-
   const renderListItems = (courses) => {
-    return courses.map((item) => <SectionCoursesItem item={item} />);
+    return courses.map((item) => (
+      <SectionCoursesItem key={item.id} item={item} />
+    ));
   };
   const OnPressed = () => {
-    RootNavigation.navigate("ListCourses", { item: courses });
+    RootNavigation.navigate("ListCourses", { item: courses, title: title });
   };
+
+  const { courses } = useContext(CoursesContext);
   return (
-    <View>
+    <View style={{ backgroundColor: "#F0F2F5" }}>
       <View style={styles.headerContainer}>
-        <Text>{title}</Text>
+        <Text style={{ color: "#050505" }}>{title}</Text>
         <TouchableOpacity style={styles.expand} onPress={OnPressed}>
           <Text>See all</Text>
           <Image
@@ -62,7 +34,9 @@ function Sectioncourses({ title }) {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+        {renderListItems(courses)}
+      </ScrollView>
     </View>
   );
 }

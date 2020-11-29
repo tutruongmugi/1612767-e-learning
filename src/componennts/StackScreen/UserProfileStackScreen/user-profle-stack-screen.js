@@ -16,7 +16,7 @@ function UserProfileStackScreen() {
         name="UserProfileStackScreen"
         component={UserProfile}
         options={{
-          headerTitle: "User Profile",
+          headerTitle: "Profile",
           headerStyle: {
             backgroundColor: "#e91e63",
           },
@@ -27,7 +27,7 @@ function UserProfileStackScreen() {
           headerRight: () => (
             <TouchableOpacity onPress={OnPressed}>
               <Image
-                style={{ marginLeft: 5, width: 25, height: 25 }}
+                style={{ marginLeft: 5, width: 25, height: 25, marginRight: 5 }}
                 source={require("../../../../assets/icon-setting.png")}
               />
             </TouchableOpacity>

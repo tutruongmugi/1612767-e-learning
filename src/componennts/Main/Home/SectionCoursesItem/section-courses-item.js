@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
-import { Rating } from "react-native-elements";
+import { Rating, Image } from "react-native-elements";
 
 function SectionCoursesItem({ item }) {
   const onPressSectionItem = () => {
@@ -9,12 +9,10 @@ function SectionCoursesItem({ item }) {
   };
   return (
     <TouchableOpacity style={styles.item} onPress={onPressSectionItem}>
-      <Image
-        source={require("../../../../../assets/1.png")}
-        style={styles.image}
-      />
+      <Image source={{ uri: item.image }} style={styles.image} />
+
       <View style={styles.text}>
-        <Text>{item.title}</Text>
+        <Text style={{ color: "#050505" }}>{item.title}</Text>
         <Text style={styles.darkText}>{item.author}</Text>
         <Text
           style={styles.darkText}
@@ -31,15 +29,15 @@ function SectionCoursesItem({ item }) {
 const styles = StyleSheet.create({
   item: {
     margin: 5,
-    width: 230,
+    width: 250,
     height: 200,
-    backgroundColor: "lightgray",
+    backgroundColor: "#FFF",
   },
   image: {
     height: 110,
   },
   darkText: {
-    color: "darkgray",
+    color: "#65676B",
   },
 
   text: {

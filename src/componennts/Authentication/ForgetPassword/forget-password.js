@@ -1,11 +1,14 @@
 import React from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import styles from "../../../globals/styles";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function ForgetPassword() {
   const handleEmailInputChange = () => {};
   const handleSubmit = () => {};
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    RootNavigation.goBack();
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Reset Your Password</Text>

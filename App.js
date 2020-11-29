@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import {
   Alert,
@@ -41,49 +41,103 @@ import EditProfileStackScreen from "./src/componennts/StackScreen/EditProfiileSt
 import ChangePasswordStackScreen from "./src/componennts/StackScreen/ChangePasswordStackScreen/change-password-stack-screen";
 import SettingStackScreen from "./src/componennts/StackScreen/SettingStackScreen/setting-stack-screen";
 import ListCoursesStackScreen from "./src/componennts/StackScreen/ListCoursesStackScreen/list-courses-stack-screen";
+import { MenuProvider } from "react-native-popup-menu";
+import SplashScreen from "./src/componennts/SplashScreen/splash-screen";
+import { AppProvider } from "./src/provider/app-provider";
+import NewRelease from "./src/componennts/Content/NewRelease/new-release";
+import RecommendForYou from "./src/componennts/Content/RecommendForYou/recommend-for-you";
+import AuthorDetail from "./src/componennts/Authors/AuthorDetail/author-detail";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          component={MainStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen
-          name="CourseDetail"
-          component={CourseDetail}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-        <Stack.Screen name="VerifyPassword" component={VerifyPassword} />
-        <Stack.Screen
-          name="ChangePassword"
-          component={ChangePasswordStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfileStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="UserProfile"
-          component={UserProfileStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Setting"
-          component={SettingStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="ListCourses" component={ListCourses} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <MenuProvider>
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator initialRouteName="SplashScreen">
+            <Stack.Screen
+              name="Main"
+              component={MainStackScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SplashScreen"
+              component={SplashScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CourseDetail"
+              component={CourseDetail}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={({ route }) => {
+                headerTitle: getFocusedRouteNameFromRoute(route);
+              }}
+            />
+            <Stack.Screen
+              name="ForgetPassword"
+              component={ForgetPassword}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="VerifyPassword"
+              component={VerifyPassword}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ChangePassword"
+              component={ChangePasswordStackScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfileStackScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="UserProfile"
+              component={UserProfileStackScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Setting"
+              component={SettingStackScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ListCourses"
+              component={ListCourses}
+              options={{ headerTitle: "" }}
+            />
+            <Stack.Screen
+              name="NewRelease"
+              component={NewRelease}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="RecommendForYou"
+              component={RecommendForYou}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AuthorDetail"
+              component={AuthorDetail}
+              options={({ route }) => {
+                headerTitle: getFocusedRouteNameFromRoute(route);
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MenuProvider>
+    </AppProvider>
   );
 }

@@ -9,63 +9,63 @@ function SectionImage() {
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 2,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 3,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 4,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 4,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 5,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 6,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 7,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 8,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 9,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 10,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 11,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 12,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 13,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 14,
       title: "CONFERENCES",
     },
     {
-      id: 1,
+      id: 15,
       title: "CONFERENCES",
     },
   ];
@@ -74,7 +74,10 @@ function SectionImage() {
     <ScrollView>
       <FlatList
         data={images}
-        renderItem={({ item }) => <ImageButton title={item.title} />}
+        renderItem={({ item }) => (
+          <ImageButton key={item.id} title={item.title} />
+        )}
+        keyExtractor={(item, index) => item + index}
         numColumns={images.length / 2}
       />
     </ScrollView>

@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
-import { Rating } from "react-native-elements";
+import { Rating, Image } from "react-native-elements";
+import CourseActionsMenuButton from "../CourseActions/course-actions-menu-button";
 
 function ListCoursesItem({ item }) {
   const onPressListItem = () => {
@@ -20,12 +14,9 @@ function ListCoursesItem({ item }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.item} onPress={onPressListItem}>
-        <Image
-          style={styles.image}
-          source={require("../../../../assets/2.png")}
-        />
+        <Image source={{ uri: item.image }} style={styles.image} />
         <View style={styles.text}>
-          <Text>{item.title}</Text>
+          <Text style={{ color: "#050505" }}>{item.title}</Text>
           <Text style={styles.darkText}>{item.author}</Text>
           <Text
             style={styles.darkText}
@@ -35,22 +26,23 @@ function ListCoursesItem({ item }) {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={OnPressedButtonMore}>
-        <Image
-          style={styles.icon}
-          source={require("../../../../assets/icon-more.png")}
+      <View>
+        <CourseActionsMenuButton
+          style={styles.trailingIcon}
+          CourseId={item.id}
         />
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     borderBottomColor: "gray",
     borderBottomWidth: 1,
-    justifyContent: "space-between",
+    flexDirection: "row",
+    backgroundColor: "#FFF",
+    padding: 5,
   },
   item: {
     margin: 5,
@@ -67,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   darkText: {
-    color: "darkgray",
+    color: "#65676B",
   },
   rate: {
     marginTop: 5,
@@ -75,10 +67,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flexDirection: "row",
   },
-  icon: {
-    width: 15,
-    margin: 10,
-    height: "20%",
+  trailingIcon: {
+    fontSize: 30,
   },
 });
 export default ListCoursesItem;

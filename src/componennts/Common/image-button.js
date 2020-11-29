@@ -7,7 +7,7 @@ import {
   Text,
 } from "react-native";
 
-function ImageButton({ title }) {
+function ImageButton({ title, onPress }) {
   return (
     <ImageBackground
       style={styles.button}
@@ -16,7 +16,7 @@ function ImageButton({ title }) {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS0NZMFsu98u0V1XBOdY_81j3BHHwxIWYDzlQ&usqp=CAU",
       }}
     >
-      <TouchableOpacity style={styles.touch}>
+      <TouchableOpacity style={styles.touch} onPress={onPress}>
         <Text style={styles.text}>{title}</Text>
       </TouchableOpacity>
     </ImageBackground>

@@ -5,12 +5,19 @@ import SectionPaths from "../Home/SectionPaths/section-paths";
 import SectionAuthors from "./SectionAuthors/section-authors";
 import SectionImage from "./SectionImage/section-image";
 import SectionSkills from "./SectionSkills/section-skills";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function Browse() {
+  const onNewReleasePressed = () => {
+    RootNavigation.navigate("NewRelease", { title: "NEW RELEASES" });
+  };
+  const onRecommendForYou = () => {
+    RootNavigation.navigate("RecommendForYou", { title: "RECOMMEND FOR YOU" });
+  };
   return (
-    <ScrollView>
-      <ImageButton title="NEW RELEASES" />
-      <ImageButton title="RECOMMEND FOR YOU" />
+    <ScrollView style={{ backgroundColor: "#F0F2F5" }}>
+      <ImageButton title="NEW RELEASES" onPress={onNewReleasePressed} />
+      <ImageButton title="RECOMMEND FOR YOU" onPress={onRecommendForYou} />
       <SectionImage />
       <SectionSkills title="Popular skills" />
       <SectionPaths title="Paths" />

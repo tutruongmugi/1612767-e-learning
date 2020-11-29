@@ -10,6 +10,7 @@ import Home from "./Home/home";
 import Downloads from "./Downloads/downloads";
 import Browse from "./Browse/browse";
 import { ScreenContainer } from "react-native-screens";
+import HomeStackScreen from "../StackScreen/HomeStackScreen/home-stack-screen";
 
 const Stack = createStackNavigator();
 
@@ -51,56 +52,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function Main() {
-  const courses = [
-    {
-      id: 1,
-      title: "react-native",
-      author: "kuro",
-      level: "Advanced",
-      released: "May 2, 2020",
-      duration: "30 hours",
-    },
-    {
-      id: 2,
-      title: "IOS",
-      author: "yuuki",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "35 hours",
-    },
-    {
-      id: 3,
-      title: "Android",
-      author: "Master",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "25 hours",
-    },
-    {
-      id: 4,
-      title: "react-native",
-      author: "kuro",
-      level: "Advanced",
-      released: "May 2, 2020",
-      duration: "30 hours",
-    },
-    {
-      id: 5,
-      title: "IOS",
-      author: "yuuki",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "35 hours",
-    },
-    {
-      id: 6,
-      title: "Android",
-      author: "Master",
-      level: "Beginner",
-      released: "May 5, 2020",
-      duration: "25 hours",
-    },
-  ];
   //   React.useLayoutEffect(() => {
   //     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   //   }, [navigation, route]);

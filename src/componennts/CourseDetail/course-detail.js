@@ -98,9 +98,9 @@ function CourseDetail({ route }) {
           <View style={styles.text}>
             <Text style={styles.title}>{item.title}</Text>
             <View>
-              <Text>{item.author}</Text>
+              <Text style={{ color: "#65676B" }}>{item.author}</Text>
             </View>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", color: "#65676B" }}>
               <Text>{`${item.level} . ${item.released} . ${item.duration}  `}</Text>
               <Rating imageSize={15} readonly startingValue={item.rate} />
               <Text>{` (${item.rateCount})`}</Text>
@@ -114,7 +114,7 @@ function CourseDetail({ route }) {
                   source={require("../../../assets/icon-bookmark.png")}
                 />
               </TouchableOpacity>
-              <Text>Bookmark</Text>
+              <Text style={styles.iconChannel}>Bookmark</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity>
@@ -123,7 +123,7 @@ function CourseDetail({ route }) {
                   source={require("../../../assets/icon-channel.png")}
                 />
               </TouchableOpacity>
-              <Text>Add to channel</Text>
+              <Text style={styles.iconChannel}>Add to channel</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity>
@@ -132,7 +132,7 @@ function CourseDetail({ route }) {
                   source={require("../../../assets/icon-download.png")}
                 />
               </TouchableOpacity>
-              <Text>Downloaded</Text>
+              <Text style={styles.iconChannel}>Downloaded</Text>
             </View>
           </View>
           <View>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: "justify",
-    color: "#345c74",
+    color: "#65676B",
   },
   readMore: {
     flexDirection: "row",
@@ -209,6 +209,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+    color: "#050505",
+    fontSize: 16,
+  },
+  iconChannel: {
+    color: "#050505",
   },
 });
 
