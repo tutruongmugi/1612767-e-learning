@@ -10,6 +10,7 @@ import {
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 import { CoursesContext } from "../../../../provider/courses-provider";
+import { ThemeContextCustom } from "../../../../provider/theme-provider";
 
 function Sectioncourses({ title }) {
   const renderListItems = (courses) => {
@@ -25,9 +26,9 @@ function Sectioncourses({ title }) {
   return (
     <View style={{ backgroundColor: "#F0F2F5" }}>
       <View style={styles.headerContainer}>
-        <Text style={{ color: "#050505" }}>{title}</Text>
+        <Text style={{ color: "#050505", fontSize: 16 }}>{title}</Text>
         <TouchableOpacity style={styles.expand} onPress={OnPressed}>
-          <Text>See all</Text>
+          <Text style={{ color: "#65676B" }}>See all</Text>
           <Image
             style={styles.image}
             source={require("../../../../../assets/icon-expand.png")}

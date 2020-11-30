@@ -47,6 +47,7 @@ import { AppProvider } from "./src/provider/app-provider";
 import NewRelease from "./src/componennts/Content/NewRelease/new-release";
 import RecommendForYou from "./src/componennts/Content/RecommendForYou/recommend-for-you";
 import AuthorDetail from "./src/componennts/Authors/AuthorDetail/author-detail";
+import PathDetail from "./src/componennts/Paths/PathDetail/path-detail";
 
 const Stack = createStackNavigator();
 
@@ -131,6 +132,13 @@ export default function App() {
             <Stack.Screen
               name="AuthorDetail"
               component={AuthorDetail}
+              options={({ route }) => {
+                headerTitle: getFocusedRouteNameFromRoute(route);
+              }}
+            />
+            <Stack.Screen
+              name="PathDetail"
+              component={PathDetail}
               options={({ route }) => {
                 headerTitle: getFocusedRouteNameFromRoute(route);
               }}

@@ -17,15 +17,19 @@ const ThemeProvider = (props) => {
 };
 export const themes = {
   light: {
-    foreground: "#000",
-    background: "#eee",
+    text: "#050505",
+    backgroundSection: "#FFF",
+    darkText: "#65676B",
+    background: "#F0F2F5",
   },
   dark: {
-    foreground: "#fff",
-    background: "#222",
+    text: "#fff",
+    backgroundSection: "#DDD",
+    darkText: "#AAA",
+    background: "#181818",
   },
 };
 
-export { ThemeContextCustom as ThemeContext, ThemeProvider };
+export { ThemeContextCustom, ThemeProvider };
 
 //error

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 import { Rating, Image } from "react-native-elements";
+import { ThemeContextCustom } from "../../../../provider/theme-provider";
 
 function SectionCoursesItem({ item }) {
   const onPressSectionItem = () => {

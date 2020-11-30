@@ -1,13 +1,15 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Image } from "react-native-elements";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
+
 function PathsItem({ item }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          console.log("something!");
+          RootNavigation.navigate("PathDetail", { item: item });
         }}
       >
         <Image source={{ uri: item.image }} style={styles.image} />

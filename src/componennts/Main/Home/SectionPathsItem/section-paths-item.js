@@ -1,9 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Image } from "react-native-elements";
+import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 
 function SectionPathsItem({ item }) {
-  const OnPressedPath = () => {};
+  const OnPressedPath = () => {
+    RootNavigation.navigate("PathDetail", { item: item });
+  };
 
   return (
     <TouchableOpacity style={styles.item} onPress={OnPressedPath}>
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
   item: {
     margin: 5,
     width: 200,
-    height: 200,
+    height: 170,
     backgroundColor: "#fff",
   },
   image: {
