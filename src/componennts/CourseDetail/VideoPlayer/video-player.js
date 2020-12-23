@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     justifyContent: "center",
+    marginTop: 20,
   },
 });
 

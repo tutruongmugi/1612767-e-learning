@@ -1,112 +1,73 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  SectionList,
-  StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import ListLessonItem from "../ListLessonsItem/list-lessons-item";
+import ListLessonActionsMenuButton from "../ListLessonActionsMenuButton/list-lesson-actions-menu-button";
 
-function ListLessons() {
-  const DATA = [
-    {
-      id: 1,
-      title: "Courses Overview",
-      duration: "1:16",
-      data: [
-        {
-          id: 1,
-          title: "Introduce",
-          duration: "1:16",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Creating your first java app",
-      duration: "39:11",
-      data: [
-        {
-          id: 1,
-          title: "Introduce",
-          duration: "1:15",
-        },
-        {
-          id: 2,
-          title: "Creating your app with IntelliJ",
-          duration: "6:11",
-        },
-        {
-          id: 3,
-          title: "IDE,JDK, and JRE",
-          duration: "3:18",
-        },
-        {
-          id: 4,
-          title: "Running from the command line",
-          duration: "2:15",
-        },
-        {
-          id: 5,
-          title: "Comments",
-          duration: "3:24",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "Variables, Data Types, and Math Operators",
-      duration: "26:13",
-      data: [
-        {
-          id: 1,
-          title: "Introduce",
-          duration: "1:15",
-        },
-        {
-          id: 2,
-          title: "Creating your app with IntelliJ",
-          duration: "6:11",
-        },
-        {
-          id: 3,
-          title: "IDE,JDK, and JRE",
-          duration: "3:18",
-        },
-        {
-          id: 4,
-          title: "Running from the command line",
-          duration: "2:15",
-        },
-        {
-          id: 5,
-          title: "Comments",
-          duration: "3:24",
-        },
-      ],
-    },
-  ];
+function ListLessons({ section }) {
+  const renderSectionItem = (sectionItem, index) => {
+    return (
+      <View key={sectionItem.id} style={{ marginTop: 10 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            marginLeft: 5,
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <View
+              style={{
+                width: 50,
+                height: 50,
+                backgroundColor: "#65676B",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text>{index + 1}</Text>
+            </View>
+            <View
+              style={{
+                padding: 5,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View>
+                <Text style={styles.text}>{sectionItem.name}</Text>
+                <Text
+                  style={styles.duration}
+                >{`${sectionItem.sumHours} Hours`}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={{ marginRight: 5 }}>
+            <ListLessonActionsMenuButton style={{ fontSize: 30 }} />
+          </View>
+        </View>
+
+        {sectionItem.lesson.map((item) => (
+          <ListLessonItem key={item.id} lesson={item} />
+        ))}
+      </View>
+    );
+  };
   return (
     <View>
-      <SectionList
-        sections={DATA}
-        renderItem={({ item }) => <ListLessonItem lesson={item} />}
-        renderSectionHeader={({ section }) => (
-          <View>
-            <Text style={styles.text}>{section.title}</Text>
-          </View>
-        )}
-      />
+      <ScrollView>
+        {section.map((sectionItem, index) => {
+          return renderSectionItem(sectionItem, index);
+        })}
+      </ScrollView>
     </View>
   );
 }
 const styles = StyleSheet.create({
   text: {
-    marginLeft: 10,
     justifyContent: "flex-start",
+    fontWeight: "bold",
   },
 });
 export default ListLessons;

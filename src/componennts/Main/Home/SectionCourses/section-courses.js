@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 import { CoursesContext } from "../../../../provider/courses-provider";
 import { ThemeContextCustom } from "../../../../provider/theme-provider";
 
-function Sectioncourses({ title }) {
+function Sectioncourses({ courses, title, loaded }) {
   const renderListItems = (courses) => {
     return courses.map((item) => (
       <SectionCoursesItem key={item.id} item={item} />
@@ -22,7 +23,7 @@ function Sectioncourses({ title }) {
     RootNavigation.navigate("ListCourses", { item: courses, title: title });
   };
 
-  const { courses } = useContext(CoursesContext);
+  // const { courses } = useContext(CoursesContext);
   return (
     <View style={{ backgroundColor: "#F0F2F5" }}>
       <View style={styles.headerContainer}>
@@ -35,9 +36,17 @@ function Sectioncourses({ title }) {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-        {renderListItems(courses)}
-      </ScrollView>
+      {!loaded ? (
+        <View
+          style={{ justifyContent: "center", flex: 1, flexDirection: "row" }}
+        >
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ) : (
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+          {renderListItems(courses)}
+        </ScrollView>
+      )}
     </View>
   );
 }

@@ -12,7 +12,7 @@ import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function RecommendForYou({ route }) {
-  const { courses } = useContext(CoursesContext);
+  const { courseState } = useContext(CoursesContext);
   const FlatListItemSeparator = () => {
     return (
       //Item Separator
@@ -30,12 +30,11 @@ function RecommendForYou({ route }) {
     RootNavigation.goBack();
   };
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ImageBackground
         style={{ height: 150 }}
         source={{
-          uri:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS0NZMFsu98u0V1XBOdY_81j3BHHwxIWYDzlQ&usqp=CAU",
+          uri: "https://wallpaperaccess.com/full/889209.png",
         }}
       >
         <Text
@@ -62,7 +61,7 @@ function RecommendForYou({ route }) {
         </TouchableOpacity>
       </ImageBackground>
       <FlatList
-        data={courses}
+        data={courseState.topRecommendCourses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}

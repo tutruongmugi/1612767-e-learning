@@ -7,10 +7,10 @@ import {
   Text,
 } from "react-native";
 
-function ImageButton({ title, onPress }) {
+function ImageButton({ title, onPress, style1, imageBackground }) {
   return (
     <ImageBackground
-      style={styles.button}
+      style={style1}
       source={{
         uri:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS0NZMFsu98u0V1XBOdY_81j3BHHwxIWYDzlQ&usqp=CAU",

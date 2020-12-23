@@ -48,6 +48,9 @@ import NewRelease from "./src/componennts/Content/NewRelease/new-release";
 import RecommendForYou from "./src/componennts/Content/RecommendForYou/recommend-for-you";
 import AuthorDetail from "./src/componennts/Authors/AuthorDetail/author-detail";
 import PathDetail from "./src/componennts/Paths/PathDetail/path-detail";
+import SearchByCategory from "./src/componennts/Content/SearchByCategory/search-by-category";
+import AuthorDetailStackScreen from "./src/componennts/StackScreen/AuthorDetailStackScreen/author-detail-stack-screen";
+import PathDetailStackScreen from "./src/componennts/StackScreen/PathDetailStackScreen/path-detail-stack-screen";
 
 const Stack = createStackNavigator();
 
@@ -56,7 +59,7 @@ export default function App() {
     <AppProvider>
       <MenuProvider>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName="SplashScreen">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               name="Main"
               component={MainStackScreen}
@@ -80,9 +83,7 @@ export default function App() {
             <Stack.Screen
               name="Register"
               component={Register}
-              options={({ route }) => {
-                headerTitle: getFocusedRouteNameFromRoute(route);
-              }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ForgetPassword"
@@ -116,8 +117,8 @@ export default function App() {
             />
             <Stack.Screen
               name="ListCourses"
-              component={ListCourses}
-              options={{ headerTitle: "" }}
+              component={ListCoursesStackScreen}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="NewRelease"
@@ -130,18 +131,25 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="SearchByCategory"
+              component={SearchByCategory}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="AuthorDetail"
-              component={AuthorDetail}
-              options={({ route }) => {
-                headerTitle: getFocusedRouteNameFromRoute(route);
-              }}
+              component={AuthorDetailStackScreen}
+              options={{ headerShown: false }}
+              // options={({ route }) => {
+              //   headerTitle: getFocusedRouteNameFromRoute(route);
+              // }}
             />
             <Stack.Screen
               name="PathDetail"
-              component={PathDetail}
-              options={({ route }) => {
-                headerTitle: getFocusedRouteNameFromRoute(route);
-              }}
+              component={PathDetailStackScreen}
+              options={{ headerShown: false }}
+              // options={({ route }) => {
+              //   headerTitle: getFocusedRouteNameFromRoute(route);
+              // }}
             />
           </Stack.Navigator>
         </NavigationContainer>

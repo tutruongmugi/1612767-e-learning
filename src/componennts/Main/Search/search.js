@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import SearchAlls from "./Alls/search-alls";
 import SearchAuthors from "./Authors/search-authors";
@@ -13,19 +13,25 @@ import { AuthorsContext } from "../../../provider/authors-provider";
 const Tab = createMaterialTopTabNavigator();
 
 function Search() {
-  const { courses } = useContext(CoursesContext);
+  const { courseState, getListCoursesBySearchKeyword } = useContext(
+    CoursesContext
+  );
   const { paths } = useContext(PathsContext);
   const { authors } = useContext(AuthorsContext);
-  const [searchStatus, setSearchStatus] = useState(false);
+  const [searchStatus, setSearchStatus] = useState(true);
   const [currentKeyword, setCurrentKeyword] = useState("");
 
   const handleSearch = () => {};
   const handleInputChange = (value) => {
+    setSearchStatus(false);
     setCurrentKeyword(value);
   };
-  const searchCoursesByTitle = () => {
-    return courses.filter((course) => course.title.includes(currentKeyword));
-  };
+  useEffect(() => {
+    getListCoursesBySearchKeyword(currentKeyword);
+  }, [currentKeyword]);
+  // const searchCoursesByTitle = () => {
+  //   return courses.filter((course) => course.title.includes(currentKeyword));
+  // };
   const searchPathsByTitle = () => {
     return paths.filter((path) => path.title.includes(currentKeyword));
   };
@@ -38,34 +44,40 @@ function Search() {
         handleSearch={handleSearch}
         handleInputChange={handleInputChange}
       />
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Alls"
-          children={() => (
-            <SearchAlls
-              courses={searchCoursesByTitle()}
-              authors={searchAuthorsByTitle()}
-              paths={searchPathsByTitle()}
-            />
-          )}
-          options={{ tabBarLabel: "Alls" }}
-        />
-        <Tab.Screen
-          name="Courses"
-          children={() => <SearchCourses courses={searchCoursesByTitle()} />}
-          options={{ tabBarLabel: "Courses" }}
-        />
-        <Tab.Screen
-          name="Authors"
-          children={() => <SearchAuthors authors={searchAuthorsByTitle()} />}
-          options={{ tabBarLabel: "Authors" }}
-        />
-        <Tab.Screen
-          name="Paths"
-          children={() => <SearchPaths paths={searchPathsByTitle()} />}
-          options={{ tabBarLabel: "Paths" }}
-        />
-      </Tab.Navigator>
+      {searchStatus ? (
+        <View />
+      ) : (
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Alls"
+            children={() => (
+              <SearchAlls
+                courses={courseState.listCoursesBySearchKeyword}
+                authors={searchAuthorsByTitle()}
+                paths={searchPathsByTitle()}
+              />
+            )}
+            options={{ tabBarLabel: "Alls" }}
+          />
+          <Tab.Screen
+            name="Courses"
+            children={() => (
+              <SearchCourses courses={courseState.listCoursesBySearchKeyword} />
+            )}
+            options={{ tabBarLabel: "Courses" }}
+          />
+          <Tab.Screen
+            name="Authors"
+            children={() => <SearchAuthors authors={searchAuthorsByTitle()} />}
+            options={{ tabBarLabel: "Authors" }}
+          />
+          <Tab.Screen
+            name="Paths"
+            children={() => <SearchPaths paths={searchPathsByTitle()} />}
+            options={{ tabBarLabel: "Paths" }}
+          />
+        </Tab.Navigator>
+      )}
     </ScrollView>
   );
 }

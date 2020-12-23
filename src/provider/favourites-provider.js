@@ -4,7 +4,7 @@ import { CoursesContext } from "./courses-provider";
 const FavouritesContext = React.createContext();
 
 const FavouritesProvider = (props) => {
-  const [favouriteCourses, setFavouriteCourses] = useState([]);
+  const [favouriteCourses, setFavouriteCourses] = useState([1, 2, 3]);
 
   const addFavouriteCourse = (courseId) => {
     console.log("addFavouriteCourse", courseId);

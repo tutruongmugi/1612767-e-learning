@@ -2,19 +2,21 @@ import React, { useState, useEffect, useContext } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import styles from "../../../globals/styles";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
-import { login } from "../../../core/services/authentication-services";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState(null);
-
+  const [isLogging, setIsLogging] = useState(true);
+  const authContext = useContext(AuthenticationContext);
   useEffect(() => {
-    if (status && status.status == 200) {
-      RootNavigation.navigate("Main");
+    if (authContext.state.isAuthenticated) {
+      setEmail("");
+      setPassword("");
+      setIsLogging(true);
+      RootNavigation.navigate("Main", { userInfo: authContext.state.userInfo });
     }
-  }, [status]);
+  }, [authContext.state.isAuthenticated]);
 
   const handleEmailInputChange = (text) => {
     setEmail(text);
@@ -35,17 +37,14 @@ function Login() {
   };
 
   const renderLoginStatus = (status) => {
-    if (!status) {
+    if (isLogging) {
       return <View />;
-    } else if (status.status === 200) {
-      return <Text>Login successful</Text>;
+    } else if (!status) {
+      return <Text>Email or Password was incorrecct!</Text>;
     } else {
-      return <Text>{status.errorString}</Text>;
+      return <Text>Login successful!!</Text>;
     }
   };
-  const { authentication, setAuthentication } = useContext(
-    AuthenticationContext
-  );
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Sign In</Text>
@@ -67,7 +66,7 @@ function Login() {
           defaultValue={password}
         />
       </View>
-      {renderLoginStatus(status)}
+      {renderLoginStatus(authContext.state.isAuthenticated)}
       <TouchableOpacity onPress={onPressedForgotPassword}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
@@ -75,16 +74,14 @@ function Login() {
         style={styles.loginBtn}
         onPress={() => {
           console.log(`${email}=${password}`);
-          setStatus(login(email, password));
-          setAuthentication(login(email, password));
+          authContext.login(email, password);
+          setIsLogging(false);
         }}
       >
         <Text style={styles.loginText}>SIGN IN</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPressedSignUp}>
-        <Text style={styles.loginText} onPress={onPressedSignUp}>
-          SIGN UP
-        </Text>
+      <TouchableOpacity onPress={onPressedSignUp} onPress={onPressedSignUp}>
+        <Text style={styles.loginText}>SIGN UP</Text>
       </TouchableOpacity>
     </View>
   );

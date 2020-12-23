@@ -7,34 +7,43 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { CoursesContext } from "../../../provider/courses-provider";
 import { FavouritesContext } from "../../../provider/favourites-provider";
 
 function CourseActionsMenuButton({ CourseId }) {
   const [favourite, setFavourite] = useState(false);
-  const { addFavouriteCourse, removeFavouriteCourse } = useContext(
-    FavouritesContext
+  // const {
+  //   favouriteCourses,
+  //   addFavouriteCourse,
+  //   removeFavouriteCourse,
+  // } = useContext(FavouritesContext);
+  const { likeCourse, startLikeCourse, courseState } = useContext(
+    CoursesContext
   );
-  const { courses } = useContext(CoursesContext);
+  const { state } = useContext(AuthenticationContext);
 
   useEffect(() => {
     getFavouriteById(CourseId);
 
     return () => {};
   }, []);
-
+  useEffect(() => {
+    if (courseState.changeFavouriteSucess) {
+      setFavourite(!favourite);
+    }
+  }, [courseState.changeFavouriteSucess]);
   const getFavouriteById = (CourseId) => {
-    setFavourite(courses.find((course) => course.id === CourseId).favourite);
+    setFavourite(
+      courseState.favouriteCourses.some(
+        (favouriteCourse) => favouriteCourse.id === CourseId
+      )
+    );
   };
 
   const onPressFavourite = () => {
-    if (favourite) {
-      removeFavouriteCourse(CourseId);
-      setFavourite(!favourite);
-    } else {
-      addFavouriteCourse(CourseId);
-      setFavourite(!favourite);
-    }
+    likeCourse(state.token, CourseId);
+    startLikeCourse();
   };
   return (
     <Menu>

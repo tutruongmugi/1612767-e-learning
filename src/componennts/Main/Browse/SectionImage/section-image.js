@@ -1,84 +1,34 @@
 import React from "react";
 import { View, ScrollView, FlatList, StyleSheet } from "react-native";
 import ImageButton from "../../../Common/image-button";
+import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 
-function SectionImage() {
-  const images = [
-    {
-      id: 1,
-      title: "CONFERENCES",
-    },
-    {
-      id: 2,
-      title: "CONFERENCES",
-    },
-    {
-      id: 3,
-      title: "CONFERENCES",
-    },
-    {
-      id: 4,
-      title: "CONFERENCES",
-    },
-    {
-      id: 4,
-      title: "CONFERENCES",
-    },
-    {
-      id: 5,
-      title: "CONFERENCES",
-    },
-    {
-      id: 6,
-      title: "CONFERENCES",
-    },
-    {
-      id: 7,
-      title: "CONFERENCES",
-    },
-    {
-      id: 8,
-      title: "CONFERENCES",
-    },
-    {
-      id: 9,
-      title: "CONFERENCES",
-    },
-    {
-      id: 10,
-      title: "CONFERENCES",
-    },
-    {
-      id: 11,
-      title: "CONFERENCES",
-    },
-    {
-      id: 12,
-      title: "CONFERENCES",
-    },
-    {
-      id: 13,
-      title: "CONFERENCES",
-    },
-    {
-      id: 14,
-      title: "CONFERENCES",
-    },
-    {
-      id: 15,
-      title: "CONFERENCES",
-    },
-  ];
+function SectionImage({ data }) {
+  var n = Math.round(data.length / 2);
 
   return (
-    <ScrollView>
+    <ScrollView horizontal={true}>
       <FlatList
-        data={images}
+        data={data}
         renderItem={({ item }) => (
-          <ImageButton key={item.id} title={item.title} />
+          <ImageButton
+            key={item.id}
+            title={item.name}
+            onPress={() => {
+              RootNavigation.navigate("SearchByCategory", {
+                title: item.name,
+                data: item,
+              });
+            }}
+            style1={{ height: 50, margin: 5, width: 180 }}
+          />
         )}
         keyExtractor={(item, index) => item + index}
-        numColumns={images.length / 2}
+        numColumns={n}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+        key={n}
       />
     </ScrollView>
   );

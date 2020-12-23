@@ -8,11 +8,10 @@ import { Image } from "react-native-elements";
 
 function UserProfile() {
   const OnPressedEditProfile = () => {
-    console.log(authentication.user);
     RootNavigation.navigate("EditProfile");
   };
-  const { authentication } = useContext(AuthenticationContext);
-
+  const { state } = useContext(AuthenticationContext);
+  console.log("component profile: ", state);
   return (
     <View style={style1.container}>
       <View style={style1.info}>
@@ -34,11 +33,13 @@ function UserProfile() {
           <Text>EDIT</Text>
         </TouchableOpacity>
         <Text style={{ marginTop: 20, fontSize: 24 }}>
-          {authentication.user.fullName}
+          {state.userInfo.name}
         </Text>
-        <Text style={{ marginTop: 10, fontSize: 16 }}>0357004545</Text>
         <Text style={{ marginTop: 10, fontSize: 16 }}>
-          {authentication.user.email}
+          {state.userInfo.phone}
+        </Text>
+        <Text style={{ marginTop: 10, fontSize: 16 }}>
+          {state.userInfo.email}
         </Text>
       </View>
       <View

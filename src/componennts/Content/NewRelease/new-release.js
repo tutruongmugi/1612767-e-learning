@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   ImageBackground,
@@ -12,7 +12,10 @@ import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function NewRelease({ route }) {
-  const { courses } = useContext(CoursesContext);
+  const { getTopNewCourses, courseState } = useContext(CoursesContext);
+  // useEffect(() => {
+  //   getTopNewCourses();
+  // }, []);
   const FlatListItemSeparator = () => {
     return (
       //Item Separator
@@ -29,7 +32,7 @@ function NewRelease({ route }) {
     RootNavigation.goBack();
   };
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Image
         source={{
           uri:
@@ -39,8 +42,7 @@ function NewRelease({ route }) {
       <ImageBackground
         style={{ height: 150 }}
         source={{
-          uri:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS0NZMFsu98u0V1XBOdY_81j3BHHwxIWYDzlQ&usqp=CAU",
+          uri: "https://wallpaperaccess.com/full/16221.jpg",
         }}
       >
         <Text
@@ -68,7 +70,10 @@ function NewRelease({ route }) {
       </ImageBackground>
 
       <FlatList
-        data={courses}
+        // data={courses.filter((course) =>
+        //   newReleaseCoursesId.includes(course.id)
+        // )}
+        data={courseState.topNewCourses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}

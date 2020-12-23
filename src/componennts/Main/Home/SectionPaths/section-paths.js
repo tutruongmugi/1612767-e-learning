@@ -48,11 +48,14 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     margin: 5,
+    marginTop: 15,
   },
   expand: {
     flexDirection: "row",
+    marginBottom: 5,
   },
   text: {
     color: "#050505",
+    marginTop: 10,
   },
 });

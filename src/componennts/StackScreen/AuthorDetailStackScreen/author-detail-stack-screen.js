@@ -1,19 +1,20 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { TouchableOpacity, Image } from "react-native";
+import * as RootNavigation from "../../../routes/navigations/root-navigation";
 import { createStackNavigator } from "@react-navigation/stack";
-import ListCourses from "../../Courses/ListCourses/list-courses";
+import AuthorDetail from "../../Authors/AuthorDetail/author-detail";
 
 const Stack = createStackNavigator();
 
-function ListCoursesStackScreen({ route }) {
+function AuthorDetailStackScreen({ route }) {
   const params = route.params;
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="ListCoursesStackScreen"
-        component={(props) => <ListCourses courses={params.item} {...props} />}
+        name="AuthorDetailStackScreen"
+        component={(props) => <AuthorDetail author={params.item} {...props} />}
         options={{
-          headerTitle: params.title,
+          headerTitle: "Author Detail",
           headerStyle: {
             backgroundColor: "#e91e63",
           },
@@ -26,4 +27,5 @@ function ListCoursesStackScreen({ route }) {
     </Stack.Navigator>
   );
 }
-export default ListCoursesStackScreen;
+
+export default AuthorDetailStackScreen;

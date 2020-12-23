@@ -4,9 +4,9 @@ import { Image } from "react-native-elements";
 import { CoursesContext } from "../../../provider/courses-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
-function PathDetail({ route }) {
+function PathDetail({ path }) {
   const { courses } = useContext(CoursesContext);
-  const path = route.params.item;
+  // const path = route.params.item;
   const FlatListItemSeparator = () => {
     return (
       //Item Separator
@@ -29,7 +29,7 @@ function PathDetail({ route }) {
         </View>
       </View>
       <Text style={styles.text}>{path.description}</Text>
-      <View style={{ marginTop: 30 }}>
+      <View style={{ marginTop: 30, flex: 1 }}>
         <Text style={styles.text}>Advanced</Text>
         <FlatList
           data={courses}
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 8,
     backgroundColor: "#FFF",
+    flex: 1,
   },
   headerProfile: {
     flexDirection: "row",

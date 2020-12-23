@@ -10,17 +10,17 @@ function SectionCoursesItem({ item }) {
   };
   return (
     <TouchableOpacity style={styles.item} onPress={onPressSectionItem}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.imageUrl }} style={styles.image} />
 
       <View style={styles.text}>
         <Text style={{ color: "#050505" }}>{item.title}</Text>
-        <Text style={styles.darkText}>{item.author}</Text>
+        <Text style={styles.darkText}>Phạm Hoàng Hải</Text>
         <Text
           style={styles.darkText}
-        >{`${item.level} . ${item.released} . ${item.duration}`}</Text>
+        >{`${item.updatedAt} . ${item.totalHours}`}</Text>
         <View style={styles.rate}>
-          <Rating imageSize={15} readonly startingValue={item.rate} />
-          <Text style={styles.darkText}>{` (${item.rateCount})`}</Text>
+          <Rating imageSize={15} readonly startingValue={item.contentPoint} />
+          <Text style={styles.darkText}>{` (${item.ratedNumber})`}</Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
   text: {
     color: "#050505",
     flexWrap: "wrap",
+    width: 60,
+    textAlign: "center",
   },
 });
 export default SectionAuthorsItem;

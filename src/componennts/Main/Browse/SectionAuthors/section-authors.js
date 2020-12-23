@@ -24,10 +24,12 @@ const styles = StyleSheet.create({
   container: {
     margin: 5,
     backgroundColor: "#F0F2F5",
+    marginTop: 15,
   },
 
   text: {
     color: "#050505",
+    marginBottom: 10,
   },
 });
 export default SectionAuthors;

@@ -3,30 +3,24 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Image } from "react-native-elements";
 
 function ListLessonItem({ lesson }) {
-  const handleCheckBoxClick = () => {};
-
   return (
     <TouchableOpacity style={styles.container}>
-      <Image
-        style={{ width: 50, height: 50 }}
-        source={{
-          uri:
-            "https://pluralsight.imgix.net/course-images/javascript-getting-started-v1.png?w=1078",
-        }}
-      />
-      <View
-        style={{
-          padding: 5,
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View>
-          <Text style={styles.text}>{lesson.title}</Text>
-          <Text style={styles.duration}>{lesson.duration}</Text>
-        </View>
+      <View style={{ flexDirection: "row" }}>
+        <Image
+          style={{
+            width: 15,
+            height: 15,
+            borderRadius: 15 / 2,
+            backgroundColor: "#111",
+            marginRight: 5,
+            marginTop: 3,
+            marginLeft: 10,
+          }}
+          source={require("../../../../assets/icons8-filled-circle-24.png")}
+        />
+        <Text style={styles.text}>{lesson.name}</Text>
       </View>
+      <Text style={styles.duration}>{`${lesson.hours} Hours`}</Text>
     </TouchableOpacity>
   );
 }
@@ -35,14 +29,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     backgroundColor: "#fff",
-    margin: 5,
+    justifyContent: "space-between",
+    marginTop: 5,
   },
   text: {},
   checkBox: {
     alignSelf: "center",
   },
   duration: {
-    justifyContent: "flex-end",
+    marginRight: 5,
   },
 });
 

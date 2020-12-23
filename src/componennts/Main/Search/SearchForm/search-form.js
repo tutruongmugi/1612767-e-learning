@@ -14,6 +14,11 @@ function SearchForm({ handleSearch, handleInputChange }) {
 
   return (
     <View style={styles.container}>
+      <Ionicons
+        style={styles.searchIcon}
+        name="md-search"
+        onPress={handleSearch}
+      />
       <TextInput
         value={value}
         ref={input}
@@ -21,13 +26,8 @@ function SearchForm({ handleSearch, handleInputChange }) {
           setValue(value);
           handleInputChange(value);
         }}
-        placeholder="Search"
+        placeholder="Search..."
         style={styles.textInput}
-      />
-      <Ionicons
-        style={styles.searchIcon}
-        name="md-search"
-        onPress={handleSearch}
       />
     </View>
   );
@@ -36,11 +36,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     margin: 5,
+    marginTop: 20,
+    borderRadius: 8,
+    borderColor: "#111",
+    borderWidth: 1,
   },
   textInput: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: "gray",
+    // borderWidth: 1,
+    color: "#111",
   },
   searchIcon: {
     fontSize: 20,

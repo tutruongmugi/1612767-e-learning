@@ -10,7 +10,7 @@ import {
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
-function ListCourses({ route }) {
+function ListCourses({ courses }) {
   // const searchView = () => {
   //   return (
   //     <View style={{ flexDirection: "row" }}>
@@ -28,16 +28,16 @@ function ListCourses({ route }) {
   //     </View>
   //   );
   // };
-  const params = route.params;
+  console.log("TEXT: ", courses);
   return (
-    <View>
-      <Text
+    <View style={{ flex: 1 }}>
+      {/* <Text
         style={{ fontSize: 20, color: "#000", padding: 4, fontWeight: "bold" }}
       >
         {params.title}
-      </Text>
+      </Text> */}
       <FlatList
-        data={params.item}
+        data={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         // ListHeaderComponent={() => searchView()}
         keyExtractor={(item, index) => item + index}

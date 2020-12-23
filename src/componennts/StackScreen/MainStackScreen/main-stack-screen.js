@@ -28,9 +28,13 @@ function MainStackScreen() {
                   borderWidth: 1,
                   margin: 5,
                 }}
+                // source={{
+                //   uri:
+                //     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnawXcdwPn0r48TZ9H-e9g_RVOwgTJFY1XPg&usqp=CAU",
+                // }}
                 source={{
                   uri:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnawXcdwPn0r48TZ9H-e9g_RVOwgTJFY1XPg&usqp=CAU",
+                    "https://genshin.honeyhunterworld.com/img/char/keqing.png",
                 }}
               />
             </TouchableOpacity>

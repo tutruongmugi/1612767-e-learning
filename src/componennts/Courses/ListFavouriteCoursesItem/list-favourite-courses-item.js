@@ -5,7 +5,7 @@ import * as RootNavigation from "../../../routes/navigations/root-navigation";
 import { Rating, Image } from "react-native-elements";
 import CourseActionsMenuButton from "../CourseActions/course-actions-menu-button";
 
-function ListCoursesItem({ item }) {
+function ListFavouriteCoursesItem({ item }) {
   const onPressListItem = () => {
     RootNavigation.navigate("CourseDetail", { item: item });
   };
@@ -14,15 +14,17 @@ function ListCoursesItem({ item }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.item} onPress={onPressListItem}>
-        <Image source={{ uri: item.imageUrl }} style={styles.image} />
+        <Image source={{ uri: item.courseImage }} style={styles.image} />
         <View style={styles.text}>
-          <Text style={{ color: "#050505" }}>{item.title}</Text>
+          <Text style={{ color: "#050505" }}>{item.courseTitle}</Text>
           {/* <Text style={styles.darkText}>{item.author}</Text> */}
-          <Text
-            style={styles.darkText}
-          >{`${item.updatedAt} . ${item.totalHours}`}</Text>
+          <Text style={styles.darkText}>{`${item.coursePrice}$`}</Text>
           <View style={styles.rate}>
-            <Rating imageSize={15} readonly startingValue={item.contentPoint} />
+            <Rating
+              imageSize={15}
+              readonly
+              startingValue={item.courseContentPoint}
+            />
           </View>
         </View>
       </TouchableOpacity>
@@ -71,4 +73,4 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
-export default ListCoursesItem;
+export default ListFavouriteCoursesItem;

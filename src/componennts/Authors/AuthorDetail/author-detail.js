@@ -4,9 +4,9 @@ import { Image } from "react-native-elements";
 import { CoursesContext } from "../../../provider/courses-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
-function AuthorDetail({ route }) {
+function AuthorDetail({ author }) {
   const { courses } = useContext(CoursesContext);
-  const author = route.params.item;
+  // const author = route.params.item;
   const FlatListItemSeparator = () => {
     return (
       //Item Separator
@@ -26,7 +26,7 @@ function AuthorDetail({ route }) {
         <Text style={styles.title}>{author.name}</Text>
       </View>
       <Text style={styles.text}>{author.about}</Text>
-      <View style={{ marginTop: 30 }}>
+      <View style={{ marginTop: 30, flex: 1 }}>
         <Text style={styles.text}>Courses</Text>
         <FlatList
           data={courses}
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 8,
     backgroundColor: "#FFF",
+    flex: 1,
   },
   headerProfile: {
     alignItems: "center",

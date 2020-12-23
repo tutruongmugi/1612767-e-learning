@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 function Setting() {
+  const authContext = useContext(AuthenticationContext);
   const OnPressedSignOut = () => {
+    authContext.logout();
     RootNavigation.navigate("Login");
   };
   const OnPressedChangePassword = () => {

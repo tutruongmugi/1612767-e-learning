@@ -3,7 +3,7 @@ import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { SkillsContext } from "../../../../provider/skills-provider";
 import SectionSkillsItem from "../SectionSkillsItem/section-skills-item";
 
-function SectionSkills({ title }) {
+function SectionSkills() {
   const { skills } = useContext(SkillsContext);
 
   const renderListItems = (skills) => {
@@ -14,7 +14,6 @@ function SectionSkills({ title }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
         {renderListItems(skills)}
       </ScrollView>
@@ -27,8 +26,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F0F2F5",
   },
 
-  title: {
+  text: {
     color: "#050505",
+    marginBottom: 10,
+    marginTop: 10,
   },
 });
 export default SectionSkills;
