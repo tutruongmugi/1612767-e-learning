@@ -8,12 +8,12 @@ function SectionAuthorsItem({ item }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          RootNavigation.navigate("AuthorDetail", { item: item });
+          RootNavigation.navigate("AuthorDetail", { authorId: item.id });
         }}
       >
-        <Image source={{ uri: item.image }} style={styles.image} />
+        <Image source={{ uri: item["user.avatar"] }} style={styles.image} />
       </TouchableOpacity>
-      <Text style={styles.text}>{item.name}</Text>
+      <Text style={styles.text}>{item["user.name"]}</Text>
     </View>
   );
 }

@@ -43,7 +43,7 @@ function ListLessons({ section }) {
               </View>
             </View>
           </View>
-          <View style={{ marginRight: 5 }}>
+          <View style={{ marginRight: 10 }}>
             <ListLessonActionsMenuButton style={{ fontSize: 30 }} />
           </View>
         </View>

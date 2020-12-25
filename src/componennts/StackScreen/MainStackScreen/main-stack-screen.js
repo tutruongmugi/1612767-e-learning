@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity, Image } from "react-native";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 import { createStackNavigator } from "@react-navigation/stack";
 import Main from "../../Main/main";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const Stack = createStackNavigator();
 
 function MainStackScreen() {
+  const { state } = useContext(AuthenticationContext);
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -34,7 +36,9 @@ function MainStackScreen() {
                 // }}
                 source={{
                   uri:
-                    "https://genshin.honeyhunterworld.com/img/char/keqing.png",
+                    state.userInfo.avatar === ""
+                      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnawXcdwPn0r48TZ9H-e9g_RVOwgTJFY1XPg&usqp=CAU"
+                      : state.userInfo.avatar,
                 }}
               />
             </TouchableOpacity>

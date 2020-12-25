@@ -39,6 +39,7 @@ export const GET_LIST_COURSES_BY_SEARCH_KEYWORD =
 export const GET_COURSE_DETAIL_SUCCESS = "GET_COURSE_DETAIL_SUCCESS";
 export const GET_COURSE_DETAIL_FAILED = "GET_COURSE_DETAIL_FAILED";
 export const GET_COURSE_LIKE_STATUS = "GET_COURSE_LIKE_STATUS";
+export const SET_COURSE_LIKE_STATUS = "SET_COURSE_LIKE_STATUS";
 
 export const GetTopNewCourses = (dispatch, limit, page) => {
   apiGetTopNewCourses(limit, page)
@@ -199,6 +200,8 @@ export const GetCourseLikeStatus = (dispatch, token, courseId) => {
     .then((response) => {
       if (response.status === 200) {
         dispatch({ type: GET_COURSE_LIKE_STATUS, data: response.data });
+      } else {
+        dispatch({ type: SET_COURSE_LIKE_STATUS });
       }
     })
     .catch((error) => {});

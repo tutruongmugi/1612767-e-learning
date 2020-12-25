@@ -30,6 +30,7 @@ function CourseDetail({ route }) {
     getCourseLikeStatus,
     likeCourse,
     startLikeCourse,
+    setCourseLikeStatus,
   } = useContext(CoursesContext);
   const { state } = useContext(AuthenticationContext);
   useEffect(() => {
@@ -55,6 +56,7 @@ function CourseDetail({ route }) {
 
   const OnPressedBackButton = () => {
     startGetCourseDetail();
+    setCourseLikeStatus();
     RootNavigation.goBack();
   };
 
@@ -216,6 +218,10 @@ function CourseDetail({ route }) {
                   <Text style={styles.iconChannel}>Downloaded</Text>
                 </View>
               </View>
+
+              <View style={{ flex: 1, marginTop: 10, backgroundColor: "#FFF" }}>
+                <ListLessons section={courseState.courseDetail.section} />
+              </View>
               <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
                 Related Courses
               </Text>
@@ -225,9 +231,6 @@ function CourseDetail({ route }) {
               >
                 {renderListItems(courseState.courseDetail.coursesLikeCategory)}
               </ScrollView>
-              <View style={{ flex: 1, marginTop: 10, backgroundColor: "#FFF" }}>
-                <ListLessons section={courseState.courseDetail.section} />
-              </View>
             </View>
           </ScrollView>
         </View>

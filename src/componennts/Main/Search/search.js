@@ -9,6 +9,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { CoursesContext } from "../../../provider/courses-provider";
 import { PathsContext } from "../../../provider/paths-provider";
 import { AuthorsContext } from "../../../provider/authors-provider";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,7 +18,7 @@ function Search() {
     CoursesContext
   );
   const { paths } = useContext(PathsContext);
-  const { authors } = useContext(AuthorsContext);
+  const { AuthorState } = useContext(AuthorsContext);
   const [searchStatus, setSearchStatus] = useState(true);
   const [currentKeyword, setCurrentKeyword] = useState("");
 
@@ -36,7 +37,9 @@ function Search() {
     return paths.filter((path) => path.title.includes(currentKeyword));
   };
   const searchAuthorsByTitle = () => {
-    return authors.filter((author) => author.name.includes(currentKeyword));
+    return AuthorState.authors.filter((author) =>
+      author["user.name"].includes(currentKeyword)
+    );
   };
   return (
     <ScrollView>
@@ -45,7 +48,22 @@ function Search() {
         handleInputChange={handleInputChange}
       />
       {searchStatus ? (
-        <View />
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 550,
+          }}
+        >
+          <Ionicons
+            style={{
+              fontSize: 50,
+              padding: 5,
+            }}
+            name="md-search"
+          />
+        </View>
       ) : (
         <Tab.Navigator>
           <Tab.Screen

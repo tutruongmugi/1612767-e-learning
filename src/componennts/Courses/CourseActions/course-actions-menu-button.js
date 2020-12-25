@@ -28,11 +28,6 @@ function CourseActionsMenuButton({ CourseId }) {
 
     return () => {};
   }, []);
-  useEffect(() => {
-    if (courseState.changeFavouriteSucess) {
-      setFavourite(!favourite);
-    }
-  }, [courseState.changeFavouriteSucess]);
   const getFavouriteById = (CourseId) => {
     setFavourite(
       courseState.favouriteCourses.some(
@@ -43,6 +38,7 @@ function CourseActionsMenuButton({ CourseId }) {
 
   const onPressFavourite = () => {
     likeCourse(state.token, CourseId);
+    setFavourite(!favourite);
     startLikeCourse();
   };
   return (

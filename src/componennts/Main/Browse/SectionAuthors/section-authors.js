@@ -4,7 +4,7 @@ import { AuthorsContext } from "../../../../provider/authors-provider";
 import SectionAuthorsItem from "../SectionAuthorsItem/section-authors-item";
 
 function SectionAuthors({ title }) {
-  const { authors } = useContext(AuthorsContext);
+  const { AuthorState } = useContext(AuthorsContext);
 
   const renderItem = (authors) => {
     return authors.map((item) => (
@@ -15,7 +15,7 @@ function SectionAuthors({ title }) {
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-        {renderItem(authors)}
+        {renderItem(AuthorState.authors)}
       </ScrollView>
     </View>
   );

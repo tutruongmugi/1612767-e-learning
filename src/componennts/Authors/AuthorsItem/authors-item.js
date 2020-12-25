@@ -9,13 +9,15 @@ function AuthorsItem({ item }) {
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          RootNavigation.navigate("AuthorDetail", { item: item });
+          RootNavigation.navigate("AuthorDetail", { authorId: item.id });
         }}
       >
-        <Image source={{ uri: item.image }} style={styles.image} />
+        <Image source={{ uri: item["user.avatar"] }} style={styles.image} />
         <View style={styles.text}>
-          <Text style={{ color: "#000" }}>{item.name}</Text>
-          <Text style={styles.darkText}>{item.course}</Text>
+          <Text style={{ color: "#000" }}>{item["user.name"]}</Text>
+          <Text style={styles.darkText}>{`${
+            item.skills.length + 1
+          } Courses `}</Text>
         </View>
       </TouchableOpacity>
     </View>

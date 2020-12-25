@@ -88,6 +88,9 @@ const CoursesProvider = (props) => {
   const getCourseLikeStatus = (token, courseId) => {
     GetCourseLikeStatus(dispatch, token, courseId);
   };
+  const setCourseLikeStatus = () => {
+    dispatch({ type: "SET_COURSE_LIKE_STATUS" });
+  };
 
   return (
     <CoursesContext.Provider
@@ -109,6 +112,7 @@ const CoursesProvider = (props) => {
         getCourseDetail,
         startGetCourseDetail,
         getCourseLikeStatus,
+        setCourseLikeStatus,
       }}
     >
       {props.children}

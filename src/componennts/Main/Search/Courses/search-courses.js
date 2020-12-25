@@ -19,7 +19,6 @@ function SearchCourses({ courses }) {
   return (
     <View>
       <View>
-        <Text>Skill Levels</Text>
         <Text>{`${courses.length} results`}</Text>
       </View>
       {/* <ListCourses courses={courses} /> */}

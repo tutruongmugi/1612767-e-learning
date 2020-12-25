@@ -1,12 +1,35 @@
-import React, { useContext } from "react";
-import { Text, View, FlatList, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { Image } from "react-native-elements";
-import { CoursesContext } from "../../../provider/courses-provider";
+import { AuthorsContext } from "../../../provider/authors-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
-function AuthorDetail({ author }) {
-  const { courses } = useContext(CoursesContext);
-  // const author = route.params.item;
+function AuthorDetail({ authorId }) {
+  const [isLoading, SetIsLoading] = useState(true);
+
+  const { AuthorState, getAuthorDetail, startGetAuthorDetail } = useContext(
+    AuthorsContext
+  );
+  useEffect(() => {
+    if (!AuthorState.getAuthorDetailStatus) {
+      if (isLoading) {
+        getAuthorDetail(authorId);
+      }
+    } else {
+      SetIsLoading(false);
+    }
+
+    return () => {
+      startGetAuthorDetail();
+    };
+  }, [AuthorState.getAuthorDetailStatus]);
+
   const FlatListItemSeparator = () => {
     return (
       //Item Separator
@@ -20,21 +43,42 @@ function AuthorDetail({ author }) {
     );
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.headerProfile}>
-        <Image source={{ uri: author.image }} style={styles.image} />
-        <Text style={styles.title}>{author.name}</Text>
-      </View>
-      <Text style={styles.text}>{author.about}</Text>
-      <View style={{ marginTop: 30, flex: 1 }}>
-        <Text style={styles.text}>Courses</Text>
-        <FlatList
-          data={courses}
-          renderItem={({ item }) => <ListCoursesItem item={item} />}
-          ItemSeparatorComponent={FlatListItemSeparator}
-          keyExtractor={(item, index) => item + index}
-        />
-      </View>
+    <View style={{ flex: 1 }}>
+      {isLoading ? (
+        <View
+          style={{ justifyContent: "center", flex: 1, flexDirection: "row" }}
+        >
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.headerProfile}>
+            <Image
+              source={{ uri: AuthorState.authorDetail.avatar }}
+              style={styles.image}
+            />
+            <Text style={styles.title}>{AuthorState.authorDetail.name}</Text>
+          </View>
+          <Text
+            style={{
+              color: "#000",
+              marginBottom: 5,
+              alignSelf: "center",
+            }}
+          >
+            {AuthorState.authorDetail.intro}
+          </Text>
+          <View style={{ marginTop: 30, flex: 1 }}>
+            <Text style={styles.text}>Courses</Text>
+            <FlatList
+              data={AuthorState.authorDetail.courses}
+              renderItem={({ item }) => <ListCoursesItem item={item} />}
+              ItemSeparatorComponent={FlatListItemSeparator}
+              keyExtractor={(item, index) => item + index}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 }

@@ -14,7 +14,8 @@ function SectionCoursesItem({ item }) {
 
       <View style={styles.text}>
         <Text style={{ color: "#050505" }}>{item.title}</Text>
-        <Text style={styles.darkText}>Phạm Hoàng Hải</Text>
+        <Text style={styles.darkText}>{item["instructor.user.name"]}</Text>
+
         <Text
           style={styles.darkText}
         >{`${item.updatedAt} . ${item.totalHours}`}</Text>

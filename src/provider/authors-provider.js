@@ -1,5 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useReducer } from "react";
+import { reducer } from "../reducer/authors-reducer";
+import {
+  GetListAuthor,
+  GetAuthorDetail,
+  GET_AUTHOR_DETAIL_FAILED,
+} from "../action/authors-action";
 
 const authorsData = [
   {
@@ -94,11 +99,39 @@ const AuthorsContext = React.createContext();
 
 const AuthorsProvider = (props) => {
   const [authors, setAuthors] = useState(authorsData);
-
   const [authorIds] = useState(Array.from(authors.keys()));
 
+  const initialState = {
+    authors: [],
+    getListAuthorsStatus: false,
+    authorDetail: {},
+    getAuthorDetailStatus: false,
+  };
+
+  const [AuthorState, dispatch] = useReducer(reducer, initialState);
+
+  const getListAuthor = () => {
+    GetListAuthor(dispatch);
+  };
+  const getAuthorDetail = (authorId) => {
+    GetAuthorDetail(dispatch, authorId);
+  };
+  const startGetAuthorDetail = () => {
+    dispatch({ type: "GET_AUTHOR_DETAIL_FAILED" });
+  };
+
   return (
-    <AuthorsContext.Provider value={{ authors, setAuthors, authorIds }}>
+    <AuthorsContext.Provider
+      value={{
+        authors,
+        setAuthors,
+        authorIds,
+        getListAuthor,
+        AuthorState,
+        getAuthorDetail,
+        startGetAuthorDetail,
+      }}
+    >
       {props.children}
     </AuthorsContext.Provider>
   );

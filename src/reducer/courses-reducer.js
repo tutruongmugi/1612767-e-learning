@@ -19,10 +19,11 @@ import {
   GET_COURSE_DETAIL_SUCCESS,
   GET_COURSE_DETAIL_FAILED,
   GET_COURSE_LIKE_STATUS,
+  SET_COURSE_LIKE_STATUS,
 } from "../action/courses-action";
 
 export const reducer = (prevState, action) => {
-  console.log("Authentication Reducer: ", action);
+  console.log("Course Reducer: ", action);
   switch (action.type) {
     case GET_TOP_NEW_COURSES_SUCCESS:
       return {
@@ -130,6 +131,11 @@ export const reducer = (prevState, action) => {
       return {
         ...prevState,
         courseLikeStatus: action.data.likeStatus,
+      };
+    case SET_COURSE_LIKE_STATUS:
+      return {
+        ...prevState,
+        courseLikeStatus: false,
       };
   }
 };

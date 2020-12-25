@@ -18,7 +18,10 @@ function UserProfile() {
         <Image
           style={style1.image}
           source={{
-            uri: "https://genshin.honeyhunterworld.com/img/char/keqing.png",
+            uri:
+              state.userInfo.avatar === ""
+                ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnawXcdwPn0r48TZ9H-e9g_RVOwgTJFY1XPg&usqp=CAU"
+                : state.userInfo.avatar,
           }}
         />
         <TouchableOpacity

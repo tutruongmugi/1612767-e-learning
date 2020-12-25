@@ -12,9 +12,11 @@ function AuthorDetailStackScreen({ route }) {
     <Stack.Navigator>
       <Stack.Screen
         name="AuthorDetailStackScreen"
-        component={(props) => <AuthorDetail author={params.item} {...props} />}
+        component={(props) => (
+          <AuthorDetail authorId={params.authorId} {...props} />
+        )}
         options={{
-          headerTitle: "Author Detail",
+          headerTitle: "Author",
           headerStyle: {
             backgroundColor: "#e91e63",
           },

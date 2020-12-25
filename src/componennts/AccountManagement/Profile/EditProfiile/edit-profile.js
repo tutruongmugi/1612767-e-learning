@@ -20,7 +20,7 @@ function EditProfile() {
   useEffect(() => {
     setName(state.userInfo.name);
     setPhone(state.userInfo.phone);
-    setAvatar("");
+    setAvatar(state.userInfo.avatar);
   }, []);
   useEffect(() => {
     if (state.updateProfileSuccess) {
@@ -32,7 +32,7 @@ function EditProfile() {
     if (isUpdating) {
       return <View />;
     } else if (!status) {
-      return <Text>Name or Phone is required!</Text>;
+      return <Text>Updating successfully!!</Text>;
     } else {
       return <Text>Updating successfully!!</Text>;
     }
@@ -61,6 +61,7 @@ function EditProfile() {
           placeholder={"Avatar..."}
           placeholderTextColor="#003f5c"
           onChangeText={(value) => setAvatar(value)}
+          value={avatar}
         />
       </View>
       {renderUpdateProfileStatus(state.updateProfileSuccess)}
