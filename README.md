@@ -1,6 +1,7 @@
 # 1612767-e-learning
 
-Trương Quang Tú 1612767
+Trương Quang Tú 
+1612767
 
 Tiến độ 2: 
   - Yêu cầu: Xây dựng ứng dụng offline cho toàn bộ ứng dụng
