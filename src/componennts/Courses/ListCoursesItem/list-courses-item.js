@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 
 import { Rating, Image } from "react-native-elements";
 import CourseActionsMenuButton from "../CourseActions/course-actions-menu-button";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function ListCoursesItem({ item }) {
   const onPressListItem = () => {
     RootNavigation.navigate("CourseDetail", { item: item });
   };
   const OnPressedButtonMore = () => {};
-
+  const { theme } = useContext(ThemeContext);
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.backgroundSection,
+          margin: 10,
+          borderRadius: 8,
+          marginTop: 5,
+        },
+      ]}
+    >
       <TouchableOpacity style={styles.item} onPress={onPressListItem}>
         <Image source={{ uri: item.imageUrl }} style={styles.image} />
         <View style={styles.text}>
-          <Text style={{ color: "#050505" }}>{item.title}</Text>
+          <Text style={{ color: theme.text }}>{item.title}</Text>
           {/* <Text style={styles.darkText}>{item.author}</Text> */}
           <Text
-            style={styles.darkText}
+            style={{ color: theme.darkText }}
           >{`${item.updatedAt} . ${item.totalHours}`}</Text>
           <View style={styles.rate}>
             <Rating imageSize={15} readonly startingValue={item.contentPoint} />
@@ -27,10 +38,7 @@ function ListCoursesItem({ item }) {
         </View>
       </TouchableOpacity>
       <View>
-        <CourseActionsMenuButton
-          style={styles.trailingIcon}
-          CourseId={item.id}
-        />
+        <CourseActionsMenuButton CourseId={item.id} />
       </View>
     </View>
   );

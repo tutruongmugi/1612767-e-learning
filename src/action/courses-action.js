@@ -10,6 +10,9 @@ import {
   apiGetLikeStatus,
   apiGetCourseDetail,
   apiGetCourseLikeStatus,
+  apiGetFreeCourses,
+  apiCheckOwnCourse,
+  apiGetProcessCourses,
 } from "../core/services/course-middlewares";
 
 export const GET_COURSES_ERROR = "GET_COURSES_ERROR";
@@ -40,6 +43,12 @@ export const GET_COURSE_DETAIL_SUCCESS = "GET_COURSE_DETAIL_SUCCESS";
 export const GET_COURSE_DETAIL_FAILED = "GET_COURSE_DETAIL_FAILED";
 export const GET_COURSE_LIKE_STATUS = "GET_COURSE_LIKE_STATUS";
 export const SET_COURSE_LIKE_STATUS = "SET_COURSE_LIKE_STATUS";
+export const GET_FREE_COURSES_SUCCESS = "GET_FREE_COURSES_SUCCESS";
+export const GET_FREE_COURSES_FAILED = "GET_FREE_COURSES_FAILED";
+export const CHECK_OWN_COURSE_SUCCESS = "CHECK_OWN_COURSE_SUCCESS";
+export const CHECK_OWN_COURSE_FAILED = "CHECK_OWN_COURSE_FAILED";
+export const GET_PROCESS_COURSES_SUCCESS = "GET_PROCESS_COURSES_SUCCESS";
+export const GET_PROCESS_COURSES_FAILED = "GET_PROCESS_COURSES_FAILED";
 
 export const GetTopNewCourses = (dispatch, limit, page) => {
   apiGetTopNewCourses(limit, page)
@@ -205,4 +214,39 @@ export const GetCourseLikeStatus = (dispatch, token, courseId) => {
       }
     })
     .catch((error) => {});
+};
+export const GetFreeCourses = (dispatch, token, courseId) => {
+  apiGetFreeCourses(token, courseId)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: GET_FREE_COURSES_SUCCESS });
+      } else {
+        dispatch({ type: GET_FREE_COURSES_FAILED });
+      }
+    })
+    .catch((error) => {
+      dispatch({ type: GET_FREE_COURSES_FAILED });
+    });
+};
+export const CheckOwnCourse = (dispatch, token, courseId) => {
+  apiCheckOwnCourse(token, courseId)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: CHECK_OWN_COURSE_SUCCESS, data: response.data });
+      }
+    })
+    .catch((error) => {});
+};
+export const GetProcessCourses = (dispatch, token) => {
+  apiGetProcessCourses(token)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: GET_PROCESS_COURSES_SUCCESS, data: response.data });
+      } else {
+        dispatch({ type: GET_TOP_NEW_COURSES_FAILED });
+      }
+    })
+    .catch((error) => {
+      dispatch({ type: GET_TOP_NEW_COURSES_FAILED });
+    });
 };

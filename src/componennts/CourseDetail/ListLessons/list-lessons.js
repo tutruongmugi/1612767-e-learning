@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import ListLessonItem from "../ListLessonsItem/list-lessons-item";
 import ListLessonActionsMenuButton from "../ListLessonActionsMenuButton/list-lesson-actions-menu-button";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function ListLessons({ section }) {
+  const { theme } = useContext(ThemeContext);
   const renderSectionItem = (sectionItem, index) => {
     return (
       <View key={sectionItem.id} style={{ marginTop: 10 }}>
@@ -17,7 +19,7 @@ function ListLessons({ section }) {
           <View style={{ flexDirection: "row" }}>
             <View
               style={{
-                width: 50,
+                width: 75,
                 height: 50,
                 backgroundColor: "#65676B",
                 flexDirection: "row",
@@ -25,7 +27,7 @@ function ListLessons({ section }) {
                 alignItems: "center",
               }}
             >
-              <Text>{index + 1}</Text>
+              <Text style={{ color: theme.text }}>{index + 1}</Text>
             </View>
             <View
               style={{
@@ -36,9 +38,11 @@ function ListLessons({ section }) {
               }}
             >
               <View>
-                <Text style={styles.text}>{sectionItem.name}</Text>
+                <Text style={[styles.text, { color: theme.text }]}>
+                  {sectionItem.name}
+                </Text>
                 <Text
-                  style={styles.duration}
+                  style={[styles.duration, { color: theme.darkText }]}
                 >{`${sectionItem.sumHours} Hours`}</Text>
               </View>
             </View>

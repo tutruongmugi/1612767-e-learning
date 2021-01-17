@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Image } from "react-native-elements";
 import { AuthorsContext } from "../../../provider/authors-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 
 function AuthorDetail({ authorId }) {
@@ -16,6 +17,7 @@ function AuthorDetail({ authorId }) {
   const { AuthorState, getAuthorDetail, startGetAuthorDetail } = useContext(
     AuthorsContext
   );
+  const { theme, language } = useContext(ThemeContext);
   useEffect(() => {
     if (!AuthorState.getAuthorDetailStatus) {
       if (isLoading) {
@@ -30,20 +32,8 @@ function AuthorDetail({ authorId }) {
     };
   }, [AuthorState.getAuthorDetailStatus]);
 
-  const FlatListItemSeparator = () => {
-    return (
-      //Item Separator
-      <View
-        style={{
-          height: 0.5,
-          width: "100%",
-          backgroundColor: "#C8C8C8",
-        }}
-      />
-    );
-  };
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
       {isLoading ? (
         <View
           style={{ justifyContent: "center", flex: 1, flexDirection: "row" }}
@@ -57,11 +47,13 @@ function AuthorDetail({ authorId }) {
               source={{ uri: AuthorState.authorDetail.avatar }}
               style={styles.image}
             />
-            <Text style={styles.title}>{AuthorState.authorDetail.name}</Text>
+            <Text style={[styles.title, { color: theme.text }]}>
+              {AuthorState.authorDetail.name}
+            </Text>
           </View>
           <Text
             style={{
-              color: "#000",
+              color: theme.text,
               marginBottom: 5,
               alignSelf: "center",
             }}
@@ -69,11 +61,12 @@ function AuthorDetail({ authorId }) {
             {AuthorState.authorDetail.intro}
           </Text>
           <View style={{ marginTop: 30, flex: 1 }}>
-            <Text style={styles.text}>Courses</Text>
+            <Text style={[styles.text, { color: theme.text }]}>
+              {language.COURSES}
+            </Text>
             <FlatList
               data={AuthorState.authorDetail.courses}
               renderItem={({ item }) => <ListCoursesItem item={item} />}
-              ItemSeparatorComponent={FlatListItemSeparator}
               keyExtractor={(item, index) => item + index}
             />
           </View>
@@ -94,7 +87,6 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 8,
-    backgroundColor: "#FFF",
     flex: 1,
   },
   headerProfile: {

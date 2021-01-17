@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import styles from "../../../../globals/styles";
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 
 function EditProfile() {
@@ -12,7 +13,7 @@ function EditProfile() {
   const { state, updateProfile, startUpdateProfile } = useContext(
     AuthenticationContext
   );
-
+  const { theme, language } = useContext(ThemeContext);
   const handleSubmit = () => {
     updateProfile(state.token, name, avatar, phone);
     setIsUpdating(false);
@@ -38,35 +39,48 @@ function EditProfile() {
     }
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Edit Your Profile</Text>
-      <View style={styles.inputView}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.logo, { color: theme.text }]}>
+        {language.EDIT_YOUR_PROFILE}
+      </Text>
+      <View
+        style={[styles.inputView, { backgroundColor: theme.backgroundSection }]}
+      >
         <TextInput
           placeholder={"Name..."}
           placeholderTextColor="#003f5c"
           onChangeText={(value) => setName(value)}
           value={name}
+          style={{ color: theme.text }}
         />
       </View>
-      <View style={styles.inputView}>
+      <View
+        style={[styles.inputView, { backgroundColor: theme.backgroundSection }]}
+      >
         <TextInput
           placeholder={"Phone..."}
           placeholderTextColor="#003f5c"
           onChangeText={(value) => setPhone(value)}
           value={phone}
+          style={{ color: theme.text }}
         />
       </View>
-      <View style={styles.inputView}>
+      <View
+        style={[styles.inputView, { backgroundColor: theme.backgroundSection }]}
+      >
         <TextInput
           placeholder={"Avatar..."}
           placeholderTextColor="#003f5c"
           onChangeText={(value) => setAvatar(value)}
           value={avatar}
+          style={{ color: theme.text }}
         />
       </View>
       {renderUpdateProfileStatus(state.updateProfileSuccess)}
       <TouchableOpacity style={styles.loginBtn} onPress={handleSubmit}>
-        <Text style={styles.loginText}>Submit</Text>
+        <Text style={[styles.loginText, { color: theme.text }]}>
+          {language.SUBMIT}
+        </Text>
       </TouchableOpacity>
     </View>
   );

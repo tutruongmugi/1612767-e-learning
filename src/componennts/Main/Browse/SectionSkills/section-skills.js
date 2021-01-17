@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { SkillsContext } from "../../../../provider/skills-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import SectionSkillsItem from "../SectionSkillsItem/section-skills-item";
 
 function SectionSkills() {
   const { skills } = useContext(SkillsContext);
+  const { theme } = useContext(ThemeContext);
 
   const renderListItems = (skills) => {
     return skills.map((item) => (
@@ -13,7 +15,7 @@ function SectionSkills() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
         {renderListItems(skills)}
       </ScrollView>

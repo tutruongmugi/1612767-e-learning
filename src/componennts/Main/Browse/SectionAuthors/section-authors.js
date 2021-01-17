@@ -1,19 +1,20 @@
 import React, { useContext } from "react";
 import { Text, View, ScrollView, StyleSheet, Image } from "react-native";
 import { AuthorsContext } from "../../../../provider/authors-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import SectionAuthorsItem from "../SectionAuthorsItem/section-authors-item";
 
 function SectionAuthors({ title }) {
   const { AuthorState } = useContext(AuthorsContext);
-
+  const { theme } = useContext(ThemeContext);
   const renderItem = (authors) => {
     return authors.map((item) => (
       <SectionAuthorsItem key={item.id} item={item} />
     ));
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.text, { color: theme.text }]}>{title}</Text>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
         {renderItem(AuthorState.authors)}
       </ScrollView>

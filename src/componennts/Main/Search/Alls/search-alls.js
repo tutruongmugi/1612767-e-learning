@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   SectionList,
   View,
@@ -7,36 +7,33 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import AuthorsItem from "../../../Authors/AuthorsItem/authors-item";
 import ListCoursesItem from "../../../Courses/ListCoursesItem/list-courses-item";
 import PathsItem from "../../../Paths/PathsItem/paths-item";
 
 function SearchAll({ courses, authors, paths }) {
-  const FlatListItemSeparator = () => {
-    return (
-      //Item Separator
-      <View style={styles.listItemSeparatorStyle} />
-    );
-  };
+  const { theme, language } = useContext(ThemeContext);
 
   const OnPressedCoursesResults = () => {};
   const OnPressedPathsResults = () => {};
   const OnPressedAuthorsResults = () => {};
 
   return (
-    <View>
+    <View style={{ backgroundColor: theme.background, height: "100%" }}>
       <FlatList
         data={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
         ListHeaderComponent={() => (
           <View style={styles.header}>
-            <Text>Courses</Text>
+            <Text style={{ color: theme.text }}>{language.COURSES}</Text>
             <TouchableOpacity onPress={OnPressedCoursesResults}>
-              <Text>{`${courses.length} results`}</Text>
+              <Text
+                style={{ color: theme.text }}
+              >{`${courses.length} ${language.RESULTS}`}</Text>
             </TouchableOpacity>
           </View>
         )}
-        ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}
       />
       <FlatList
@@ -44,13 +41,14 @@ function SearchAll({ courses, authors, paths }) {
         renderItem={({ item }) => <PathsItem item={item} />}
         ListHeaderComponent={() => (
           <View style={styles.header}>
-            <Text>Paths</Text>
+            <Text style={{ color: theme.text }}>{language.PATHS}</Text>
             <TouchableOpacity onPress={OnPressedPathsResults}>
-              <Text>{`${paths.length} results`}</Text>
+              <Text
+                style={{ color: theme.text }}
+              >{`${paths.length} ${language.RESULTS}`}</Text>
             </TouchableOpacity>
           </View>
         )}
-        ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}
       />
       <FlatList
@@ -58,13 +56,14 @@ function SearchAll({ courses, authors, paths }) {
         renderItem={({ item }) => <AuthorsItem item={item} />}
         ListHeaderComponent={() => (
           <View style={styles.header}>
-            <Text>Authors</Text>
+            <Text style={{ color: theme.text }}>{language.AUTHORS}</Text>
             <TouchableOpacity onPress={OnPressedAuthorsResults}>
-              <Text>{`${authors.length} results`}</Text>
+              <Text
+                style={{ color: theme.text }}
+              >{`${authors.length} ${language.RESULTS}`}</Text>
             </TouchableOpacity>
           </View>
         )}
-        ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}
       />
     </View>

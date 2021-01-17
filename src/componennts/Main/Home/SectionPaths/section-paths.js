@@ -8,21 +8,24 @@ import {
   StyleSheet,
 } from "react-native";
 import { PathsContext } from "../../../../provider/paths-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 
 function SectionPaths({ title }) {
   const { paths } = useContext(PathsContext);
-
+  const { theme, language } = useContext(ThemeContext);
   const renderListItems = (paths) => {
     return paths.map((item) => <SectionPathsItem key={item.id} item={item} />);
   };
   const OnPressed = () => {};
   return (
-    <View style={{ backgroundColor: "#F0F2F5" }}>
+    <View style={{ backgroundColor: theme.background }}>
       <View style={styles.headerContainer}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={[styles.text, { color: theme.text }]}>{title}</Text>
         <TouchableOpacity style={styles.expand} onPress={OnPressed}>
-          <Text style={styles.text}>See all</Text>
+          <Text style={[styles.text, { color: theme.text }]}>
+            {language.SEE_ALL}
+          </Text>
           <Image
             style={styles.image}
             source={require("../../../../../assets/icon-expand.png")}

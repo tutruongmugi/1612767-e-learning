@@ -20,6 +20,12 @@ import {
   GET_COURSE_DETAIL_FAILED,
   GET_COURSE_LIKE_STATUS,
   SET_COURSE_LIKE_STATUS,
+  GET_FREE_COURSES_SUCCESS,
+  GET_FREE_COURSES_FAILED,
+  CHECK_OWN_COURSE_SUCCESS,
+  CHECK_OWN_COURSE_FAILED,
+  GET_PROCESS_COURSES_SUCCESS,
+  GET_PROCESS_COURSES_FAILED,
 } from "../action/courses-action";
 
 export const reducer = (prevState, action) => {
@@ -136,6 +142,32 @@ export const reducer = (prevState, action) => {
       return {
         ...prevState,
         courseLikeStatus: false,
+      };
+    case GET_FREE_COURSES_SUCCESS:
+      return {
+        ...prevState,
+        getFreeCoursesStatus: true,
+      };
+    case GET_FREE_COURSES_FAILED:
+      return {
+        ...prevState,
+        getFreeCoursesStatus: false,
+      };
+    case CHECK_OWN_COURSE_SUCCESS:
+      return {
+        ...prevState,
+        checkOwnCourseStatus: action.data.payload.isUserOwnCourse,
+      };
+    case GET_PROCESS_COURSES_SUCCESS:
+      return {
+        ...prevState,
+        processCourses: action.data.payload,
+        getProcessCoursesStatus: true,
+      };
+    case GET_PROCESS_COURSES_FAILED:
+      return {
+        ...prevState,
+        getProcessCoursesStatus: false,
       };
   }
 };

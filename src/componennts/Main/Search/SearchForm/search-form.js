@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -7,10 +7,12 @@ import {
   Text,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 function SearchForm({ handleSearch, handleInputChange }) {
   const input = React.createRef();
   const [value, setValue] = useState("");
+  const { language } = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
@@ -26,7 +28,7 @@ function SearchForm({ handleSearch, handleInputChange }) {
           setValue(value);
           handleInputChange(value);
         }}
-        placeholder="Search..."
+        placeholder={`${language.SEARCH}...`}
         style={styles.textInput}
       />
     </View>

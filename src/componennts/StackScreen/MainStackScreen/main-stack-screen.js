@@ -5,18 +5,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Main from "../../Main/main";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 const Stack = createStackNavigator();
 
 function MainStackScreen() {
   const { state } = useContext(AuthenticationContext);
+  const { language } = useContext(ThemeContext);
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="MainStackScreen"
         component={Main}
         options={({ route }) => ({
-          headerTitle: getHeaderTitle(route),
+          headerTitle: getHeaderTitle(route, language.HOME),
           headerRight: () => (
             <TouchableOpacity
               onPress={() => RootNavigation.navigate("UserProfile")}
@@ -49,7 +51,7 @@ function MainStackScreen() {
               source={require("../../../../assets/logo.png")}
             />
           ),
-          headerShown: notSearchTab(route),
+          headerShown: notSearchTab(route, language),
           headerStyle: {
             backgroundColor: "#e91e63",
           },
@@ -62,14 +64,17 @@ function MainStackScreen() {
     </Stack.Navigator>
   );
 }
-const getHeaderTitle = (route) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
+const getHeaderTitle = (route, HOME) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? HOME;
 
   return routeName;
 };
 
-const notSearchTab = (route) => {
-  if (getHeaderTitle(route) === "Search") {
+const notSearchTab = (route, language) => {
+  if (getHeaderTitle(route, language.HOME) === "Search") {
+    return false;
+  }
+  if (getHeaderTitle(route, language.HOME) === language.SEARCH) {
     return false;
   }
   return true;

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   logo: {
     fontWeight: "bold",
     fontSize: 35,
-    color: "#000",
+    color: "#050505",
     marginBottom: 40,
   },
   inputView: {

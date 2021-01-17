@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   FlatList,
@@ -9,8 +9,10 @@ import {
 } from "react-native";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function ListCourses({ courses }) {
+  const { theme } = useContext(ThemeContext);
   // const searchView = () => {
   //   return (
   //     <View style={{ flexDirection: "row" }}>
@@ -30,7 +32,9 @@ function ListCourses({ courses }) {
   // };
   console.log("TEXT: ", courses);
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}
+    >
       {/* <Text
         style={{ fontSize: 20, color: "#000", padding: 4, fontWeight: "bold" }}
       >

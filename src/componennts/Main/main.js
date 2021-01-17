@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Alert, StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,6 +11,7 @@ import Downloads from "./Downloads/downloads";
 import Browse from "./Browse/browse";
 import { ScreenContainer } from "react-native-screens";
 import HomeStackScreen from "../StackScreen/HomeStackScreen/home-stack-screen";
+import { ThemeContext } from "../../provider/theme-provider";
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,7 @@ function Main() {
   //   React.useLayoutEffect(() => {
   //     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   //   }, [navigation, route]);
+  const { language } = useContext(ThemeContext);
   return (
     <Tab.Navigator
       initialRouteName={"Home"}
@@ -63,10 +65,10 @@ function Main() {
         activeTintColor: "#e91e63",
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Downloads" component={Downloads} />
-      <Tab.Screen name="Browse" component={Browse} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name={language.HOME} component={Home} />
+      <Tab.Screen name={language.DOWNLOADS} component={Downloads} />
+      <Tab.Screen name={language.BROWSE} component={Browse} />
+      <Tab.Screen name={language.SEARCH} component={Search} />
     </Tab.Navigator>
   );
 }
@@ -93,6 +95,18 @@ const screenOptions = ({ route }) => ({
         iconName = "ios-apps";
         break;
       case "Search":
+        iconName = "md-search";
+        break;
+      case "Trang chủ":
+        iconName = "md-home";
+        break;
+      case "Tải xuống":
+        iconName = "md-download";
+        break;
+      case "Duyệt qua":
+        iconName = "ios-apps";
+        break;
+      case "Tìm Kiếm":
         iconName = "md-search";
         break;
       default:

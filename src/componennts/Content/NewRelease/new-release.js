@@ -10,29 +10,22 @@ import {
 import { CoursesContext } from "../../../provider/courses-provider";
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function NewRelease({ route }) {
   const { getTopNewCourses, courseState } = useContext(CoursesContext);
+  const { theme } = useContext(ThemeContext);
   // useEffect(() => {
   //   getTopNewCourses();
   // }, []);
-  const FlatListItemSeparator = () => {
-    return (
-      //Item Separator
-      <View
-        style={{
-          height: 0.5,
-          width: "100%",
-          backgroundColor: "#C8C8C8",
-        }}
-      />
-    );
-  };
+
   const OnPressedBackButton = () => {
     RootNavigation.goBack();
   };
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}
+    >
       <Image
         source={{
           uri:
@@ -75,7 +68,6 @@ function NewRelease({ route }) {
         // )}
         data={courseState.topNewCourses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
-        ItemSeparatorComponent={FlatListItemSeparator}
         keyExtractor={(item, index) => item + index}
       />
     </View>

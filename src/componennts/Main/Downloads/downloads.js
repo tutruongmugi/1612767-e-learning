@@ -2,21 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import { View, FlatList, ActivityIndicator } from "react-native";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { CoursesContext } from "../../../provider/courses-provider";
-import ListFavouriteCoursesItem from "../../Courses/ListFavouriteCoursesItem/list-favourite-courses-item";
+import { ThemeContext } from "../../../provider/theme-provider";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import Favourites from "./Favourites/favourites";
+
+const Tab = createMaterialTopTabNavigator();
 
 function Downloads() {
-  const OnPressedButtonMore = () => {};
-
   const [isloading, setIsloading] = useState(true);
   const {
     courseState,
     getFavouriteCourses,
     startGetFavouriteCourses,
+    // getProcessCoursesFunc,
   } = useContext(CoursesContext);
   const { state } = useContext(AuthenticationContext);
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     getFavouriteCourses(state.token);
   }, [courseState.changeFavouriteSucess]);
+  // useEffect(() => {
+  //   getProcessCoursesFunc(state.token);
+  // }, [courseState.getFreeCoursesStatus]);
   useEffect(() => {
     if (courseState.getFavouriteCourseStatus == true) {
       setIsloading(false);
@@ -24,7 +31,9 @@ function Downloads() {
     }
   }, [courseState.getFavouriteCourseStatus]);
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}
+    >
       {isloading ? (
         <View
           style={{ justifyContent: "center", flex: 1, flexDirection: "row" }}
@@ -32,18 +41,16 @@ function Downloads() {
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       ) : (
-        <View style={{ backgroundColor: "#F0F2F5" }}>
-          <FlatList
-            // data={courses.filter((course) => favouriteCourses.includes(course.id))}
-            data={courseState.favouriteCourses}
-            renderItem={({ item }) => (
-              <ListFavouriteCoursesItem key={item.id} item={item} />
-            )}
-            keyExtractor={(item, index) => {
-              return item.id.toString();
-            }}
+        <Tab.Navigator>
+          <Tab.Screen
+            name="FAVOURITES"
+            children={() => <Favourites data={courseState.favouriteCourses} />}
           />
-        </View>
+          <Tab.Screen
+            name="My Courses"
+            children={() => <Favourites data={courseState.processCourses} />}
+          />
+        </Tab.Navigator>
       )}
     </View>
   );

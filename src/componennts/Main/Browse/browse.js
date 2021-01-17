@@ -7,32 +7,36 @@ import SectionImage from "./SectionImage/section-image";
 import SectionSkills from "./SectionSkills/section-skills";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 import { CoursesContext } from "../../../provider/courses-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function Browse() {
   const { courseState, getCategory } = useContext(CoursesContext);
+  const { theme, language } = useContext(ThemeContext);
   // useEffect(() => {
   //   getCategory();
   // }, []);
   const onNewReleasePressed = () => {
-    RootNavigation.navigate("NewRelease", { title: "NEW RELEASES" });
+    RootNavigation.navigate("NewRelease", { title: language.NEW_RELEASES });
   };
   const onRecommendForYou = () => {
-    RootNavigation.navigate("RecommendForYou", { title: "RECOMMEND FOR YOU" });
+    RootNavigation.navigate("RecommendForYou", {
+      title: language.RECOMMEND_FOR_YOU,
+    });
   };
   return (
-    <ScrollView style={{ backgroundColor: "#F0F2F5" }}>
+    <ScrollView style={{ backgroundColor: theme.background }}>
       <ImageButton
-        title="NEW RELEASES"
+        title={language.NEW_RELEASES}
         onPress={onNewReleasePressed}
-        style1={{ height: 100, margin: 5 }}
+        style1={{ height: 100, margin: 10 }}
       />
       <ImageButton
-        title="RECOMMEND FOR YOU"
+        title={language.RECOMMEND_FOR_YOU}
         onPress={onRecommendForYou}
-        style1={{ height: 100, margin: 5 }}
+        style1={{ height: 100, margin: 10 }}
       />
       <SectionImage data={courseState.category} />
-      <Text
+      {/* <Text
         style={{
           color: "#050505",
           marginBottom: 10,
@@ -42,9 +46,9 @@ function Browse() {
       >
         Popular skills
       </Text>
-      <SectionSkills />
-      <SectionPaths title="Paths" />
-      <SectionAuthors title="Top Authors" />
+      <SectionSkills /> */}
+      <SectionPaths title={language.PATHS} />
+      <SectionAuthors title={language.TOP_AUTHORS} />
     </ScrollView>
   );
 }

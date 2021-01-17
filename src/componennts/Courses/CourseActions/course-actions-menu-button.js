@@ -10,6 +10,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { CoursesContext } from "../../../provider/courses-provider";
 import { FavouritesContext } from "../../../provider/favourites-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function CourseActionsMenuButton({ CourseId }) {
   const [favourite, setFavourite] = useState(false);
@@ -22,6 +23,7 @@ function CourseActionsMenuButton({ CourseId }) {
     CoursesContext
   );
   const { state } = useContext(AuthenticationContext);
+  const { language } = useContext(ThemeContext);
 
   useEffect(() => {
     getFavouriteById(CourseId);
@@ -41,6 +43,8 @@ function CourseActionsMenuButton({ CourseId }) {
     setFavourite(!favourite);
     startLikeCourse();
   };
+
+  const onPressDownload = () => {};
   return (
     <Menu>
       <MenuTrigger>
@@ -53,16 +57,16 @@ function CourseActionsMenuButton({ CourseId }) {
         >
           <Ionicons name="md-heart" />
           <Text style={styles.text}>
-            {favourite ? "Remove Favourite" : "Favourite"}
+            {favourite ? language.REMOVE_FAVOURITE : language.FAVOURITE}
           </Text>
         </MenuOption>
         <MenuOption style={styles.container}>
           <Ionicons name="ios-radio" />
-          <Text style={styles.text}>Add To Channel</Text>
+          <Text style={styles.text}>{language.ADD_TO_CHANNEL}</Text>
         </MenuOption>
-        <MenuOption style={styles.container}>
+        <MenuOption style={styles.container} onSelect={() => onPressDownload()}>
           <Ionicons name="md-cloud-download" />
-          <Text style={styles.text}>Download</Text>
+          <Text style={styles.text}>{language.DOWNLOADS}</Text>
         </MenuOption>
       </MenuOptions>
     </Menu>

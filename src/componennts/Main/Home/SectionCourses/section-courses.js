@@ -11,7 +11,7 @@ import {
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 import { CoursesContext } from "../../../../provider/courses-provider";
-import { ThemeContextCustom } from "../../../../provider/theme-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 function Sectioncourses({ courses, title, loaded }) {
   const renderListItems = (courses) => {
@@ -22,14 +22,14 @@ function Sectioncourses({ courses, title, loaded }) {
   const OnPressed = () => {
     RootNavigation.navigate("ListCourses", { item: courses, title: title });
   };
-
+  const { theme, language } = useContext(ThemeContext);
   // const { courses } = useContext(CoursesContext);
   return (
-    <View style={{ backgroundColor: "#F0F2F5" }}>
+    <View style={{ backgroundColor: theme.background }}>
       <View style={styles.headerContainer}>
-        <Text style={{ color: "#050505", fontSize: 16 }}>{title}</Text>
+        <Text style={{ color: theme.text, fontSize: 16 }}>{title}</Text>
         <TouchableOpacity style={styles.expand} onPress={OnPressed}>
-          <Text style={{ color: "#65676B" }}>See all</Text>
+          <Text style={{ color: theme.darkText }}>{language.SEE_ALL}</Text>
           <Image
             style={styles.image}
             source={require("../../../../../assets/icon-expand.png")}
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 5,
     flexDirection: "row",
+    marginTop: 10,
   },
   image: {
     width: 10,

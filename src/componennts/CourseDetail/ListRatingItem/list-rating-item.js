@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { Image } from "react-native-elements";
+import { Rating, Image } from "react-native-elements";
 import { ThemeContext } from "../../../provider/theme-provider";
-import * as RootNavigation from "../../../routes/navigations/root-navigation";
-
-function AuthorsItem({ item }) {
+function ListRatingItem({ item }) {
   const { theme } = useContext(ThemeContext);
   return (
     <View
@@ -12,21 +10,21 @@ function AuthorsItem({ item }) {
     >
       <TouchableOpacity
         style={styles.item}
-        onPress={() => {
-          RootNavigation.navigate("AuthorDetail", { authorId: item.id });
-        }}
+        // onPress={() => {
+        //   RootNavigation.navigate("AuthorDetail", { authorId: item.id });
+        // }}
       >
-        <Image source={{ uri: item["user.avatar"] }} style={styles.image} />
+        <Image source={{ uri: null }} style={styles.image} />
         <View style={styles.text}>
-          <Text style={{ color: theme.text }}>{item["user.name"]}</Text>
-          <Text style={{ color: theme.darkText }}>{`${
-            item.skills.length + 1
-          } Courses `}</Text>
+          <Text style={{ color: theme.text }}>{item.name}</Text>
+          <Text style={{ color: theme.darkText }}>{item.comment}</Text>
+          <Rating imageSize={17} readonly startingValue={item.rate} />
         </View>
       </TouchableOpacity>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     // borderBottomColor: "gray",
@@ -50,11 +48,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   text: {
-    justifyContent: "center",
     marginLeft: 10,
   },
   darkText: {
     color: "#65676B",
   },
 });
-export default AuthorsItem;
+export default ListRatingItem;

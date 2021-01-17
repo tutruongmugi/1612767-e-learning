@@ -5,16 +5,18 @@ import * as RootNavigation from "../../../../routes/navigations/root-navigation"
 import SectionSkills from "../../../Main/Browse/SectionSkills/section-skills";
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
 import { Image } from "react-native-elements";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 function UserProfile() {
   const OnPressedEditProfile = () => {
     RootNavigation.navigate("EditProfile");
   };
   const { state } = useContext(AuthenticationContext);
+  const { theme, language } = useContext(ThemeContext);
   console.log("component profile: ", state);
   return (
-    <View style={style1.container}>
-      <View style={style1.info}>
+    <View style={{ backgroundColor: theme.background, height: "100%" }}>
+      <View style={[style1.info, { backgroundColor: theme.backgroundSection }]}>
         <Image
           style={style1.image}
           source={{
@@ -33,15 +35,22 @@ function UserProfile() {
           }}
           onPress={OnPressedEditProfile}
         >
-          <Text>EDIT</Text>
+          <Text
+            style={{
+              color: theme.text,
+              fontWeight: "bold",
+            }}
+          >
+            {language.EDIT}
+          </Text>
         </TouchableOpacity>
-        <Text style={{ marginTop: 20, fontSize: 24 }}>
+        <Text style={{ marginTop: 20, fontSize: 24, color: theme.text }}>
           {state.userInfo.name}
         </Text>
-        <Text style={{ marginTop: 10, fontSize: 16 }}>
+        <Text style={{ marginTop: 10, fontSize: 16, color: theme.text }}>
           {state.userInfo.phone}
         </Text>
-        <Text style={{ marginTop: 10, fontSize: 16 }}>
+        <Text style={{ marginTop: 10, fontSize: 16, color: theme.text }}>
           {state.userInfo.email}
         </Text>
       </View>
@@ -49,19 +58,23 @@ function UserProfile() {
         style={{
           padding: 10,
           margin: 10,
-          backgroundColor: "#FFF",
+          backgroundColor: theme.backgroundSection,
+          borderRadius: 8,
         }}
       >
-        <Text style={{ fontSize: 16 }}>Skills</Text>
+        <Text style={{ fontSize: 16, color: theme.text }}>
+          {language.SKILLS}
+        </Text>
         <Text
           style={{
             position: "absolute",
             alignSelf: "flex-end",
             padding: 10,
             fontWeight: "bold",
+            color: theme.text,
           }}
         >
-          EDIT
+          {language.EDIT}
         </Text>
         <SectionSkills />
       </View>
@@ -72,14 +85,11 @@ function UserProfile() {
 export default UserProfile;
 
 const style1 = StyleSheet.create({
-  container: {
-    backgroundColor: "#F0F2F5",
-  },
   info: {
     alignItems: "center",
     padding: 10,
     margin: 10,
-    backgroundColor: "#FFF",
+    borderRadius: 8,
   },
   image: {
     width: 100,

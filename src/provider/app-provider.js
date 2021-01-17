@@ -13,15 +13,17 @@ const AppProvider = (props) => {
   return (
     <AppContext.Provider>
       <AuthenticationProvider>
-        <CoursesProvider>
-          <FavouritesProvider>
-            <SkillsProvider>
-              <AuthorsProvider>
-                <PathsProvider>{props.children}</PathsProvider>
-              </AuthorsProvider>
-            </SkillsProvider>
-          </FavouritesProvider>
-        </CoursesProvider>
+        <ThemeProvider>
+          <CoursesProvider>
+            <FavouritesProvider>
+              <SkillsProvider>
+                <AuthorsProvider>
+                  <PathsProvider>{props.children}</PathsProvider>
+                </AuthorsProvider>
+              </SkillsProvider>
+            </FavouritesProvider>
+          </CoursesProvider>
+        </ThemeProvider>
       </AuthenticationProvider>
     </AppContext.Provider>
   );

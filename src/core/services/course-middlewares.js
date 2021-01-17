@@ -73,3 +73,24 @@ export const apiGetCourseLikeStatus = (token, courseId) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+export const apiGetFreeCourses = (token, courseId) => {
+  return axios.post(
+    apiUrl + "/payment/get-free-courses",
+    {
+      courseId: courseId,
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
+export const apiCheckOwnCourse = (token, courseId) => {
+  return axios.get(apiUrl + "/user/check-own-course/" + courseId, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+export const apiGetProcessCourses = (token) => {
+  return axios.get(apiUrl + "/user/get-process-courses", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

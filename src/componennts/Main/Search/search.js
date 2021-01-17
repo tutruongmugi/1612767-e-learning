@@ -10,6 +10,7 @@ import { CoursesContext } from "../../../provider/courses-provider";
 import { PathsContext } from "../../../provider/paths-provider";
 import { AuthorsContext } from "../../../provider/authors-provider";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -21,6 +22,7 @@ function Search() {
   const { AuthorState } = useContext(AuthorsContext);
   const [searchStatus, setSearchStatus] = useState(true);
   const [currentKeyword, setCurrentKeyword] = useState("");
+  const { theme, language } = useContext(ThemeContext);
 
   const handleSearch = () => {};
   const handleInputChange = (value) => {
@@ -67,7 +69,7 @@ function Search() {
       ) : (
         <Tab.Navigator>
           <Tab.Screen
-            name="Alls"
+            name={language.ALL}
             children={() => (
               <SearchAlls
                 courses={courseState.listCoursesBySearchKeyword}
@@ -75,24 +77,23 @@ function Search() {
                 paths={searchPathsByTitle()}
               />
             )}
-            options={{ tabBarLabel: "Alls" }}
           />
           <Tab.Screen
-            name="Courses"
+            name={language.COURSE}
             children={() => (
               <SearchCourses courses={courseState.listCoursesBySearchKeyword} />
             )}
-            options={{ tabBarLabel: "Courses" }}
+            // options={{ tabBarLabel: "Courses" }}
           />
           <Tab.Screen
-            name="Authors"
+            name={language.AUTHOR}
             children={() => <SearchAuthors authors={searchAuthorsByTitle()} />}
-            options={{ tabBarLabel: "Authors" }}
+            // options={{ tabBarLabel: "Authors" }}
           />
           <Tab.Screen
-            name="Paths"
+            name="Path"
             children={() => <SearchPaths paths={searchPathsByTitle()} />}
-            options={{ tabBarLabel: "Paths" }}
+            // options={{ tabBarLabel: "Paths" }}
           />
         </Tab.Navigator>
       )}

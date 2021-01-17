@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { Image } from "react-native-elements";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import * as RootNavigation from "../../../../routes/navigations/root-navigation";
 
 function SectionAuthorsItem({ item }) {
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -13,7 +15,9 @@ function SectionAuthorsItem({ item }) {
       >
         <Image source={{ uri: item["user.avatar"] }} style={styles.image} />
       </TouchableOpacity>
-      <Text style={styles.text}>{item["user.name"]}</Text>
+      <Text style={[styles.text, { color: theme.text }]}>
+        {item["user.name"]}
+      </Text>
     </View>
   );
 }

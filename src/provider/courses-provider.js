@@ -13,6 +13,9 @@ import {
   GetListCoursesBySearchKeyword,
   GetCourseDetail,
   GetCourseLikeStatus,
+  GetFreeCourses,
+  CheckOwnCourse,
+  GetProcessCourses,
 } from "../action/courses-action";
 
 const CoursesContext = React.createContext();
@@ -36,6 +39,10 @@ const initialState = {
   courseDetail: {},
   courseDetailSuccess: false,
   courseLikeStatus: false,
+  getFreeCoursesStatus: false,
+  checkOwnCourseStatus: false,
+  processCourses: [],
+  getProcessCoursesStatus: false,
 };
 
 const CoursesProvider = (props) => {
@@ -91,6 +98,18 @@ const CoursesProvider = (props) => {
   const setCourseLikeStatus = () => {
     dispatch({ type: "SET_COURSE_LIKE_STATUS" });
   };
+  const getFreeCourses = (token, courseId) => {
+    GetFreeCourses(dispatch, token, courseId);
+  };
+  const startGetFreeCourses = () => {
+    dispatch({ type: "GET_FREE_COURSES_FAILED" });
+  };
+  const checkOwnCourse = (token, courseId) => {
+    CheckOwnCourse(dispatch, token, courseId);
+  };
+  const getProcessCoursesFunc = (token) => {
+    GetProcessCourses(dispatch, token);
+  };
 
   return (
     <CoursesContext.Provider
@@ -113,6 +132,10 @@ const CoursesProvider = (props) => {
         startGetCourseDetail,
         getCourseLikeStatus,
         setCourseLikeStatus,
+        getFreeCourses,
+        checkOwnCourse,
+        startGetFreeCourses,
+        getProcessCoursesFunc,
       }}
     >
       {props.children}

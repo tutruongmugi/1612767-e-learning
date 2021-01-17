@@ -11,6 +11,7 @@ import {
 import ListCoursesItem from "../../Courses/ListCoursesItem/list-courses-item";
 import * as RootNavigation from "../../../routes/navigations/root-navigation";
 import { CoursesContext } from "../../../provider/courses-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function SearchByCategory({ route }) {
   const data = route.params.data;
@@ -20,6 +21,7 @@ function SearchByCategory({ route }) {
     courseState,
     startGetListCoursesByCategory,
   } = useContext(CoursesContext);
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     if (!courseState.getListCoursesByCategoryStatus) {
       if (isLoading) {
@@ -29,24 +31,15 @@ function SearchByCategory({ route }) {
       setIsLoading(false);
     }
   }, [courseState.getListCoursesByCategoryStatus]);
-  const FlatListItemSeparator = () => {
-    return (
-      //Item Separator
-      <View
-        style={{
-          height: 0.5,
-          width: "100%",
-          backgroundColor: "#C8C8C8",
-        }}
-      />
-    );
-  };
+
   const OnPressedBackButton = () => {
     startGetListCoursesByCategory();
     RootNavigation.goBack();
   };
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}
+    >
       <View style={{ flex: 1 }}>
         <Image
           source={{
@@ -97,7 +90,6 @@ function SearchByCategory({ route }) {
             // )}
             data={courseState.listCoursesByCategory}
             renderItem={({ item }) => <ListCoursesItem item={item} />}
-            ItemSeparatorComponent={FlatListItemSeparator}
             keyExtractor={(item, index) => item + index}
           />
         )}

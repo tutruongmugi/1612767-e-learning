@@ -20,7 +20,7 @@ function SectionImage({ data }) {
                 data: item,
               });
             }}
-            style1={{ height: 50, margin: 5, width: 180 }}
+            style1={{ height: 50, margin: 10, width: 180 }}
           />
         )}
         keyExtractor={(item, index) => item + index}

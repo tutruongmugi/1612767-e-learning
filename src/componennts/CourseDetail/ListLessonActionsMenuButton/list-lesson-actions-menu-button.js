@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Text, StyleSheet } from "react-native";
 
@@ -8,8 +8,10 @@ import {
   MenuOptions,
   MenuTrigger,
 } from "react-native-popup-menu";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 function ListLessonActionsMenuButton() {
+  const { language } = useContext(ThemeContext);
   return (
     <Menu>
       <MenuTrigger>
@@ -17,10 +19,10 @@ function ListLessonActionsMenuButton() {
       </MenuTrigger>
       <MenuOptions>
         <MenuOption style={styles.container}>
-          <Text style={styles.text}>Bookmark</Text>
+          <Text style={styles.text}>{language.BOOKMARK}</Text>
         </MenuOption>
         <MenuOption style={styles.container}>
-          <Text style={styles.text}>Download Module</Text>
+          <Text style={styles.text}>{language.DOWNLOAD_MODULE}</Text>
         </MenuOption>
       </MenuOptions>
     </Menu>
