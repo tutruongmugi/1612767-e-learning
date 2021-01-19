@@ -9,6 +9,8 @@ import {
   SafeAreaView,
   ActivityIndicator,
   FlatList,
+  Share,
+  TextInput,
 } from "react-native";
 import ListLessons from "./ListLessons/list-lessons";
 import ListLessonItem from "./ListLessonsItem/list-lessons-item";
@@ -21,6 +23,8 @@ import { AuthenticationContext } from "../../provider/authentication-provider";
 import { ThemeContext } from "../../provider/theme-provider";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ListRatingItem from "./ListRatingItem/list-rating-item";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { FavouritesContext } from "../../provider/favourites-provider";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -29,6 +33,8 @@ function CourseDetail({ route }) {
   const [isloading, setIsloading] = useState(true);
   const [isloadingfavourite, setIsloadingfavourite] = useState(true);
   const [favourite, setFavourite] = useState(false);
+  const [comment, setComment] = useState("");
+  const [rate, setRate] = useState(5);
   // const [isBought,setIsBought]=useState(false);
   const {
     courseState,
@@ -41,15 +47,18 @@ function CourseDetail({ route }) {
     getFreeCourses,
     startGetFreeCourses,
     checkOwnCourse,
+    postRatingCourse,
   } = useContext(CoursesContext);
   const { state } = useContext(AuthenticationContext);
   const { theme, language } = useContext(ThemeContext);
+  const { currentVideoUrl, changeVideoUrl } = useContext(FavouritesContext);
   useEffect(() => {
     if (!courseState.courseDetailSuccess) {
       if (isloading) {
         getCourseDetail(state.token, item.id);
       }
     } else {
+      changeVideoUrl(courseState.courseDetail.promoVidUrl);
       setIsloading(false);
     }
   }, [courseState.courseDetailSuccess]);
@@ -116,6 +125,16 @@ function CourseDetail({ route }) {
     startLikeCourse();
     setFavourite(!favourite);
   };
+  const OnPressShare = () => {
+    Share.share({
+      message:
+        "http://dev.letstudy.org/course-detail/" + courseState.courseDetail.id,
+    });
+  };
+  const OnChangeVideoUrl = (url) => {
+    changeVideoUrl(url);
+    console.log("huhu:", currentVideoUrl);
+  };
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
       {isloading ? (
@@ -126,7 +145,7 @@ function CourseDetail({ route }) {
         </View>
       ) : (
         <View style={{ flex: 1 }}>
-          <VideoPlayer promoVidUrl={courseState.courseDetail.promoVidUrl} />
+          <VideoPlayer />
           <SafeAreaView style={styles.backButton}>
             <TouchableOpacity onPress={OnPressedBackButton}>
               <Image
@@ -267,14 +286,14 @@ function CourseDetail({ route }) {
                         </Text>
                       </View>
                       <View style={{ alignItems: "center" }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => OnPressShare()}>
                           <Image
                             style={styles.image}
-                            source={require("../../../assets/icon-download.png")}
+                            source={require("../../../assets/share-button.png")}
                           />
                         </TouchableOpacity>
                         <Text style={styles.iconChannel}>
-                          {language.DOWNLOADS}
+                          {language.SHARE_COURSE}
                         </Text>
                       </View>
                     </View>
@@ -311,7 +330,10 @@ function CourseDetail({ route }) {
                         marginTop: 10,
                       }}
                     >
-                      <ListLessons section={courseState.courseDetail.section} />
+                      <ListLessons
+                        section={courseState.courseDetail.section}
+                        OnChangeVideoUrl={OnChangeVideoUrl}
+                      />
                     </View>
                   </View>
                 </ScrollView>
@@ -321,17 +343,67 @@ function CourseDetail({ route }) {
               name={language.RATING}
               children={() => (
                 <ScrollView>
-                  <View style={styles.container}>
+                  <View style={{ margin: 10, flex: 1 }}>
+                    <View>
+                      <Rating
+                        imageSize={30}
+                        startingValue={rate}
+                        ratingBackgroundColor={theme.backgroundSection}
+                        onFinishRating={(rating) => {
+                          setRate(rating);
+                        }}
+                      />
+                      <View
+                        style={{
+                          padding: 10,
+                          flexDirection: "row",
+                        }}
+                      >
+                        <TextInput
+                          placeholder={"Thêm bình luận"}
+                          value={comment}
+                          onChangeText={(value) => {
+                            setComment(value);
+                          }}
+                          style={{
+                            backgroundColor: theme.backgroundSection,
+                            borderRadius: 24,
+                            borderWidth: 0.2,
+                            width: "93%",
+                          }}
+                        />
+                        <Ionicons
+                          style={{
+                            fontSize: 20,
+                            padding: 5,
+                          }}
+                          name="md-add-circle-outline"
+                          onPress={() => {
+                            setComment("");
+                            setRate(5);
+                            postRatingCourse(
+                              state.token,
+                              courseState.courseDetail.id,
+                              rate,
+                              rate,
+                              rate,
+                              comment
+                            );
+                          }}
+                        />
+                      </View>
+                    </View>
                     <FlatList
-                      data={[
-                        { id: 1, name: "lml", comment: "pla bla", rate: 3 },
-                        {
-                          id: 2,
-                          name: "kuro",
-                          comment: "van la bla alh",
-                          rate: 5,
-                        },
-                      ]}
+                      // data={[
+                      //   { id: 1, name: "lml", comment: "pla bla", rate: 3 },
+                      //   {
+                      //     id: 2,
+                      //     name: "kuro",
+                      //     comment: "van la bla alh",
+                      //     rate: 5,
+                      //   },
+                      // ]}
+                      data={courseState.courseDetail.ratings.ratingList}
                       renderItem={({ item }) => (
                         <ListRatingItem key={item.id} item={item} />
                       )}

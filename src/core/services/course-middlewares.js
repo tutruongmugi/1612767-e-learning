@@ -94,3 +94,61 @@ export const apiGetProcessCourses = (token) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+export const apiPostRatingCourse = (
+  token,
+  courseId,
+  formalityPoint,
+  contentPoint,
+  presentationPoint,
+  content
+) => {
+  return axios.post(
+    "http://api.dev.letstudy.org/course/rating-course",
+    {
+      courseId: courseId,
+      formalityPoint: formalityPoint,
+      contentPoint: contentPoint,
+      presentationPoint: presentationPoint,
+      content: content,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const apiGetSearchHistory = (token) => {
+  return axios.get(apiUrl + "/course/search-history", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+export const apiDeleteSearchHistory = (token, id) => {
+  return axios.delete(
+    `​http://api.dev.letstudy.org/course​/delete-search-history​/${id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
+
+export const apiGetListCoursesBySearchKeyword = (
+  token,
+  keyword,
+  limit,
+  offset
+) => {
+  return axios.post(apiUrl + "/course/searchV2", {
+    token: token,
+    keyword: keyword,
+    limit: limit,
+    offset: offset,
+    opt: {
+      sort: {
+        attribute: "createdAt",
+        rule: "DESC",
+      },
+    },
+  });
+};

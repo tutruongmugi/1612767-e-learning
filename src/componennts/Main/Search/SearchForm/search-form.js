@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,28 +9,29 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { ThemeContext } from "../../../../provider/theme-provider";
 
-function SearchForm({ handleSearch, handleInputChange }) {
+function SearchForm({ handleSearch, currentKeyword, setCurrentKeyword }) {
   const input = React.createRef();
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState(startValue);
   const { language } = useContext(ThemeContext);
+
+  useEffect(() => {
+    console.log("start:", currentKeyword);
+  }, [currentKeyword]);
 
   return (
     <View style={styles.container}>
-      <Ionicons
-        style={styles.searchIcon}
-        name="md-search"
-        onPress={handleSearch}
-      />
       <TextInput
-        value={value}
+        value={currentKeyword}
         ref={input}
         onChangeText={(value) => {
-          setValue(value);
-          handleInputChange(value);
+          setCurrentKeyword(value);
         }}
         placeholder={`${language.SEARCH}...`}
         style={styles.textInput}
       />
+      <TouchableOpacity onPress={() => handleSearch()}>
+        <Ionicons style={styles.searchIcon} name="md-search" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   textInput: {
+    paddingLeft: 8,
     flex: 1,
     // borderWidth: 1,
     color: "#111",

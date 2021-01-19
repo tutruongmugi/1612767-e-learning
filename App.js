@@ -59,7 +59,7 @@ export default function App() {
     <AppProvider>
       <MenuProvider>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="Main"
               component={MainStackScreen}

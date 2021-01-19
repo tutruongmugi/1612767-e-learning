@@ -5,6 +5,7 @@ import { CoursesContext } from "../../../provider/courses-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Favourites from "./Favourites/favourites";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -30,6 +31,16 @@ function Downloads() {
       startGetFavouriteCourses();
     }
   }, [courseState.getFavouriteCourseStatus]);
+  const getMyObject = async () => {
+    try {
+      const downloadCourses = await AsyncStorage.getItem("@MyApp_7");
+      courseState.DownloadedCourses = JSON.parse(downloadCourses);
+      console.log("Tessss", courseState.DownloadedCourses);
+    } catch (e) {}
+  };
+  useEffect(() => {
+    getMyObject();
+  }, []);
   return (
     <View
       style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}
@@ -43,7 +54,11 @@ function Downloads() {
       ) : (
         <Tab.Navigator>
           <Tab.Screen
-            name="FAVOURITES"
+            name="Download"
+            children={() => <Favourites data={courseState.DownloadedCourses} />}
+          />
+          <Tab.Screen
+            name="Favourites"
             children={() => <Favourites data={courseState.favouriteCourses} />}
           />
           <Tab.Screen

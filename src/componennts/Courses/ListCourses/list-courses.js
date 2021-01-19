@@ -30,7 +30,7 @@ function ListCourses({ courses }) {
   //     </View>
   //   );
   // };
-  console.log("TEXT: ", courses);
+  console.log("process courses: ", courses);
   return (
     <View
       style={{ flex: 1, backgroundColor: theme.background, height: "100%" }}

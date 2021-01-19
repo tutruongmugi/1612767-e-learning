@@ -103,6 +103,8 @@ export const languages = {
     RATING: "RATING",
     ALL: "ALL",
     COURSE: "Courses",
+    REMOVE_FROM_CHANNEL: "Added to Channel",
+    SHARE_COURSE: "Share Course",
   },
   vi: {
     CHANGE_PASSWORD: "Đổi mật khẩu",
@@ -167,6 +169,8 @@ export const languages = {
     RATING: "Đánh giá",
     ALL: "Tất cả",
     COURSE: "Khóa học",
+    REMOVE_FROM_CHANNEL: "Đã được thêm",
+    SHARE_COURSE: "chia sẻ khóa học",
   },
 };
 

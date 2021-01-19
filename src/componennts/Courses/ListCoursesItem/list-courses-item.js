@@ -12,6 +12,7 @@ function ListCoursesItem({ item }) {
   };
   const OnPressedButtonMore = () => {};
   const { theme } = useContext(ThemeContext);
+  console.log("gheghe:", item);
   return (
     <View
       style={[
@@ -25,13 +26,25 @@ function ListCoursesItem({ item }) {
       ]}
     >
       <TouchableOpacity style={styles.item} onPress={onPressListItem}>
-        <Image source={{ uri: item.imageUrl }} style={styles.image} />
+        <Image
+          source={{
+            uri: item.imageUrl == null ? item.courseImage : item.imageUrl,
+          }}
+          style={styles.image}
+        />
         <View style={styles.text}>
-          <Text style={{ color: theme.text }}>{item.title}</Text>
-          {/* <Text style={styles.darkText}>{item.author}</Text> */}
-          <Text
-            style={{ color: theme.darkText }}
-          >{`${item.updatedAt} . ${item.totalHours}`}</Text>
+          <Text style={{ color: theme.text }}>
+            {item.title == null ? item.courseTitle : item.title}
+          </Text>
+          {/* <Text style={styles.darkText}>{item.name}</Text> */}
+          <Text style={{ color: theme.darkText }}>
+            {item.updatedAt == null
+              ? item.latestLearnTime.slice(0, 10)
+              : item.updatedAt.slice(0, 10) +
+                " . " +
+                Math.round(item.totalHours * 100000) / 100000 +
+                "Hours"}
+          </Text>
           <View style={styles.rate}>
             <Rating imageSize={15} readonly startingValue={item.contentPoint} />
           </View>

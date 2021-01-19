@@ -17,10 +17,12 @@ function Home() {
     getCategory,
     getFavouriteCourses,
     getProcessCoursesFunc,
+    getSearchHistory,
   } = useContext(CoursesContext);
   const { state } = useContext(AuthenticationContext);
   const { getListAuthor } = useContext(AuthorsContext);
   const { language } = useContext(ThemeContext);
+
   useEffect(() => {
     getTopNewCourses();
     getTopSellCourses();
@@ -30,6 +32,7 @@ function Home() {
     getListAuthor();
     getFavouriteCourses(state.token);
     getProcessCoursesFunc(state.token);
+    getSearchHistory(state.token);
   }, []);
   // create a function that saves your data asyncronously
   // const _storeData = async () => {

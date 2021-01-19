@@ -11,6 +11,9 @@ import { PathsContext } from "../../../provider/paths-provider";
 import { AuthorsContext } from "../../../provider/authors-provider";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { ThemeContext } from "../../../provider/theme-provider";
+import SearchHistoryItem from "./SearchHistory/SearchHistoryItem/search-history-item";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
+import SearchHistory from "./SearchHistory/search-history";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -23,15 +26,26 @@ function Search() {
   const [searchStatus, setSearchStatus] = useState(true);
   const [currentKeyword, setCurrentKeyword] = useState("");
   const { theme, language } = useContext(ThemeContext);
-
-  const handleSearch = () => {};
-  const handleInputChange = (value) => {
-    setSearchStatus(false);
-    setCurrentKeyword(value);
+  const { state } = useContext(AuthenticationContext);
+  const [searches, setSearches] = useState(false);
+  const handleSearch = () => {
+    // setCurrentKeyword(value);
+    getListCoursesBySearchKeyword(state.token, currentKeyword);
+  };
+  // const handleInputChange = (value) => {
+  //   setCurrentKeyword(value);
+  // };
+  const handleSearchByHistory = (value) => {
+    setCurrentKeyword(value.content);
+    getListCoursesBySearchKeyword(state.token, currentKeyword);
   };
   useEffect(() => {
-    getListCoursesBySearchKeyword(currentKeyword);
-  }, [currentKeyword]);
+    if (courseState.listCoursesBySearchKeywordStatus && searchStatus) {
+      setSearchStatus(false);
+      getListCoursesBySearchKeyword(state.token, currentKeyword);
+      // resetListCoursesBySearchKeywordStatus();
+    }
+  }, [courseState.listCoursesBySearchKeywordStatus]);
   // const searchCoursesByTitle = () => {
   //   return courses.filter((course) => course.title.includes(currentKeyword));
   // };
@@ -47,24 +61,12 @@ function Search() {
     <ScrollView>
       <SearchForm
         handleSearch={handleSearch}
-        handleInputChange={handleInputChange}
+        currentKeyword={currentKeyword}
+        setCurrentKeyword={setCurrentKeyword}
       />
       {searchStatus ? (
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            height: 550,
-          }}
-        >
-          <Ionicons
-            style={{
-              fontSize: 50,
-              padding: 5,
-            }}
-            name="md-search"
-          />
+        <View style={{ padding: 10 }}>
+          <SearchHistory handleSearchByHistory={handleSearchByHistory} />
         </View>
       ) : (
         <Tab.Navigator>

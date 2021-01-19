@@ -4,8 +4,9 @@ import ListLessonItem from "../ListLessonsItem/list-lessons-item";
 import ListLessonActionsMenuButton from "../ListLessonActionsMenuButton/list-lesson-actions-menu-button";
 import { ThemeContext } from "../../../provider/theme-provider";
 
-function ListLessons({ section }) {
+function ListLessons({ section, OnChangeVideoUrl }) {
   const { theme } = useContext(ThemeContext);
+  console.log("test lessons:", section);
   const renderSectionItem = (sectionItem, index) => {
     return (
       <View key={sectionItem.id} style={{ marginTop: 10 }}>
@@ -53,7 +54,11 @@ function ListLessons({ section }) {
         </View>
 
         {sectionItem.lesson.map((item) => (
-          <ListLessonItem key={item.id} lesson={item} />
+          <ListLessonItem
+            key={item.id}
+            lesson={item}
+            OnChangeVideoUrl={OnChangeVideoUrl}
+          />
         ))}
       </View>
     );

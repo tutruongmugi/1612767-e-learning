@@ -14,11 +14,11 @@ function ListRatingItem({ item }) {
         //   RootNavigation.navigate("AuthorDetail", { authorId: item.id });
         // }}
       >
-        <Image source={{ uri: null }} style={styles.image} />
+        <Image source={{ uri: item.user.avatar }} style={styles.image} />
         <View style={styles.text}>
-          <Text style={{ color: theme.text }}>{item.name}</Text>
-          <Text style={{ color: theme.darkText }}>{item.comment}</Text>
-          <Rating imageSize={17} readonly startingValue={item.rate} />
+          <Text style={{ color: theme.text }}>{item.user.name}</Text>
+          <Text style={{ color: theme.darkText }}>{item.content}</Text>
+          <Rating imageSize={17} readonly startingValue={item.contentPoint} />
         </View>
       </TouchableOpacity>
     </View>

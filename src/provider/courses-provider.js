@@ -16,6 +16,9 @@ import {
   GetFreeCourses,
   CheckOwnCourse,
   GetProcessCourses,
+  PostRatingCourse,
+  GetSearchHistory,
+  DeleteSearchHistory,
 } from "../action/courses-action";
 
 const CoursesContext = React.createContext();
@@ -36,6 +39,7 @@ const initialState = {
   changeFavouriteSucess: false,
   likeStatus: false,
   listCoursesBySearchKeyword: [],
+  listCoursesBySearchKeywordStatus: false,
   courseDetail: {},
   courseDetailSuccess: false,
   courseLikeStatus: false,
@@ -43,6 +47,11 @@ const initialState = {
   checkOwnCourseStatus: false,
   processCourses: [],
   getProcessCoursesStatus: false,
+  DownloadedCourses: [],
+  ratingStatus: false,
+  searchHistory: [],
+  getSearchHistoryStatus: false,
+  deleteSearchHistoryStatus: false,
 };
 
 const CoursesProvider = (props) => {
@@ -83,8 +92,8 @@ const CoursesProvider = (props) => {
   const getLikeStatus = (token, courseId) => {
     GetLikeStatus(dispatch, token, courseId);
   };
-  const getListCoursesBySearchKeyword = (keyword) => {
-    GetListCoursesBySearchKeyword(dispatch, keyword, 30, 1, []);
+  const getListCoursesBySearchKeyword = (token, keyword) => {
+    GetListCoursesBySearchKeyword(dispatch, token, keyword, 20, 0);
   };
   const getCourseDetail = (token, courseId) => {
     GetCourseDetail(dispatch, token, courseId);
@@ -109,6 +118,38 @@ const CoursesProvider = (props) => {
   };
   const getProcessCoursesFunc = (token) => {
     GetProcessCourses(dispatch, token);
+  };
+  const postRatingCourse = (
+    token,
+    courseId,
+    formalityPoint,
+    contentPoint,
+    presentationPoint,
+    content
+  ) => {
+    PostRatingCourse(
+      dispatch,
+      token,
+      courseId,
+      formalityPoint,
+      contentPoint,
+      presentationPoint,
+      content
+    );
+  };
+  const getSearchHistory = (token) => {
+    GetSearchHistory(dispatch, token);
+  };
+  const deleteSearchHistory = (token, id) => {
+    DeleteSearchHistory(dispatch, token, id);
+  };
+  const deleteItemHistory = (value) => {
+    var index = courseState.searchHistory.indexOf(value);
+    if (index > -1) {
+      courseState.searchHistory.splice(index, 1);
+    }
+
+    console.log("new:", courseState.searchHistory);
   };
 
   return (
@@ -136,6 +177,10 @@ const CoursesProvider = (props) => {
         checkOwnCourse,
         startGetFreeCourses,
         getProcessCoursesFunc,
+        postRatingCourse,
+        getSearchHistory,
+        deleteSearchHistory,
+        deleteItemHistory,
       }}
     >
       {props.children}

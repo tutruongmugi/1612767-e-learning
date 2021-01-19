@@ -9,3 +9,7 @@ export function navigate(name, params) {
 export function goBack() {
   navigationRef.current.goBack();
 }
+
+export function push(name, params) {
+  navigationRef.current?.push(name, params);
+}

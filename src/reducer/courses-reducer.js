@@ -26,6 +26,13 @@ import {
   CHECK_OWN_COURSE_FAILED,
   GET_PROCESS_COURSES_SUCCESS,
   GET_PROCESS_COURSES_FAILED,
+  POST_RATING_COURSE_SUCCESS,
+  POST_RATING_COURSE_FAILED,
+  GET_SEARCH_HISTORY_SUCCESS,
+  GET_SEARCH_HISTORY_FAILED,
+  DELETE_SEARCH_HISTORY_SUCCESS,
+  DELETE_SEARCH_HISTORY_FAILED,
+  GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED,
 } from "../action/courses-action";
 
 export const reducer = (prevState, action) => {
@@ -120,7 +127,13 @@ export const reducer = (prevState, action) => {
     case GET_LIST_COURSES_BY_SEARCH_KEYWORD:
       return {
         ...prevState,
-        listCoursesBySearchKeyword: action.data.payload.rows,
+        listCoursesBySearchKeyword: action.data.payload.courses.data,
+        listCoursesBySearchKeywordStatus: true,
+      };
+    case GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED:
+      return {
+        ...prevState,
+        listCoursesBySearchKeywordStatus: false,
       };
     case GET_COURSE_DETAIL_SUCCESS:
       return {
@@ -168,6 +181,37 @@ export const reducer = (prevState, action) => {
       return {
         ...prevState,
         getProcessCoursesStatus: false,
+      };
+    case POST_RATING_COURSE_SUCCESS:
+      return {
+        ...prevState,
+        ratingStatus: true,
+      };
+    case POST_RATING_COURSE_FAILED:
+      return {
+        ...prevState,
+        ratingStatus: false,
+      };
+    case GET_SEARCH_HISTORY_SUCCESS:
+      return {
+        ...prevState,
+        searchHistory: action.data.payload.data,
+        getSearchHistoryStatus: true,
+      };
+    case GET_SEARCH_HISTORY_FAILED:
+      return {
+        ...prevState,
+        getSearchHistoryStatus: false,
+      };
+    case DELETE_SEARCH_HISTORY_SUCCESS:
+      return {
+        ...prevState,
+        deleteSearchHistoryStatus: true,
+      };
+    case DELETE_SEARCH_HISTORY_FAILED:
+      return {
+        ...prevState,
+        deleteSearchHistoryStatus: false,
       };
   }
 };

@@ -12,6 +12,7 @@ function ListFavouriteCoursesItem({ item }) {
   };
   const OnPressedButtonMore = () => {};
   const { theme } = useContext(ThemeContext);
+  // console.log("gheghe:", item);
   return (
     <View
       style={[
@@ -25,18 +26,39 @@ function ListFavouriteCoursesItem({ item }) {
       ]}
     >
       <TouchableOpacity style={styles.item} onPress={onPressListItem}>
-        <Image source={{ uri: item.courseImage }} style={styles.image} />
+        <Image
+          source={{
+            uri: item.courseImage == null ? item.imageUrl : item.courseImage,
+          }}
+          style={styles.image}
+        />
         <View style={styles.text}>
-          <Text style={{ color: theme.text }}>{item.courseTitle}</Text>
-          {/* <Text style={styles.darkText}>{item.author}</Text> */}
-          <Text
-            style={{ color: theme.darkText }}
-          >{`${item.coursePrice}$`}</Text>
+          <Text style={{ color: theme.text }}>
+            {item.courseTitle == null ? item.title : item.courseTitle}
+          </Text>
+          <Text style={styles.darkText}>
+            {item.instructorName == null
+              ? item.instructor.name
+              : item.instructorName}
+          </Text>
+          <Text style={{ color: theme.darkText }}>
+            {item.updatedAt == null
+              ? item.coursePrice == null
+                ? item.latestLearnTime.slice(0, 10)
+                : item.coursePrice + "$"
+              : item.updatedAt.slice(0, 10) +
+                " . " +
+                Math.round(item.totalHours * 100000) / 100000}
+          </Text>
           <View style={styles.rate}>
             <Rating
               imageSize={15}
               readonly
-              startingValue={item.courseContentPoint}
+              startingValue={
+                item.courseContentPoint == null
+                  ? item.averagePoint
+                  : item.courseContentPoint
+              }
             />
           </View>
         </View>

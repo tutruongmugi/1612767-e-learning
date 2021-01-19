@@ -5,7 +5,7 @@ import * as RootNavigation from "../../../../routes/navigations/root-navigation"
 
 function SectionImage({ data }) {
   var n = Math.round(data.length / 2);
-
+  console.log("category:", data);
   return (
     <ScrollView horizontal={true}>
       <FlatList

@@ -13,6 +13,10 @@ import {
   apiGetFreeCourses,
   apiCheckOwnCourse,
   apiGetProcessCourses,
+  apiPostRatingCourse,
+  apiGetSearchHistory,
+  apiDeleteSearchHistory,
+  apiGetListCoursesBySearchKeyword,
 } from "../core/services/course-middlewares";
 
 export const GET_COURSES_ERROR = "GET_COURSES_ERROR";
@@ -49,6 +53,14 @@ export const CHECK_OWN_COURSE_SUCCESS = "CHECK_OWN_COURSE_SUCCESS";
 export const CHECK_OWN_COURSE_FAILED = "CHECK_OWN_COURSE_FAILED";
 export const GET_PROCESS_COURSES_SUCCESS = "GET_PROCESS_COURSES_SUCCESS";
 export const GET_PROCESS_COURSES_FAILED = "GET_PROCESS_COURSES_FAILED";
+export const POST_RATING_COURSE_SUCCESS = "POST_RATING_COURSE_SUCCESS";
+export const POST_RATING_COURSE_FAILED = "POST_RATING_COURSE_FAILED";
+export const GET_SEARCH_HISTORY_SUCCESS = "GET_SEARCH_HISTORY_SUCCESS";
+export const GET_SEARCH_HISTORY_FAILED = "GET_SEARCH_HISTORY_FAILED";
+export const DELETE_SEARCH_HISTORY_SUCCESS = "DELETE_SEARCH_HISTORY_SUCCESS";
+export const DELETE_SEARCH_HISTORY_FAILED = "DELETE_SEARCH_HISTORY_FAILED";
+export const GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED =
+  "GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED";
 
 export const GetTopNewCourses = (dispatch, limit, page) => {
   apiGetTopNewCourses(limit, page)
@@ -175,18 +187,20 @@ export const GetLikeStatus = (dispatch, token, courseId) => {
 };
 export const GetListCoursesBySearchKeyword = (
   dispatch,
+  token,
   keyword,
   limit,
-  offset,
-  idCategory
+  offset
 ) => {
-  apiGetListCoursesBySearch(keyword, limit, offset, idCategory)
+  apiGetListCoursesBySearchKeyword(token, keyword, limit, offset)
     .then((response) => {
       if (response.status === 200) {
         dispatch({
           type: GET_LIST_COURSES_BY_SEARCH_KEYWORD,
           data: response.data,
         });
+      } else {
+        dispatch({ type: GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED });
       }
     })
     .catch((error) => {});
@@ -248,5 +262,63 @@ export const GetProcessCourses = (dispatch, token) => {
     })
     .catch((error) => {
       dispatch({ type: GET_TOP_NEW_COURSES_FAILED });
+    });
+};
+
+export const PostRatingCourse = (
+  dispatch,
+  token,
+  courseId,
+  formalityPoint,
+  contentPoint,
+  presentationPoint,
+  content
+) => {
+  apiPostRatingCourse(
+    token,
+    courseId,
+    formalityPoint,
+    contentPoint,
+    presentationPoint,
+    content
+  )
+    .then((response) => {
+      console.log("okokokok", response);
+      if (response.status === 200) {
+        dispatch({ type: POST_RATING_COURSE_SUCCESS, data: response.data });
+      } else {
+        dispatch({ type: POST_RATING_COURSE_FAILED });
+      }
+    })
+    .catch((error) => {
+      console.log("meno");
+      console.log(error.message);
+      dispatch({ type: POST_RATING_COURSE_FAILED });
+    });
+};
+export const GetSearchHistory = (dispatch, token) => {
+  apiGetSearchHistory(token)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: GET_SEARCH_HISTORY_SUCCESS, data: response.data });
+      } else {
+        dispatch({ type: GET_SEARCH_HISTORY_FAILED });
+      }
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
+};
+export const DeleteSearchHistory = (dispatch, token, id) => {
+  apiDeleteSearchHistory(token, id)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: DELETE_SEARCH_HISTORY_SUCCESS });
+      } else {
+        dispatch({ type: DELETE_SEARCH_HISTORY_FAILED });
+      }
+    })
+    .catch((e) => {
+      console.log(e.message);
     });
 };

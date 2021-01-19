@@ -5,6 +5,9 @@ const FavouritesContext = React.createContext();
 
 const FavouritesProvider = (props) => {
   const [favouriteCourses, setFavouriteCourses] = useState([1, 2, 3]);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState(
+    "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"
+  ); //video url
 
   const addFavouriteCourse = (courseId) => {
     console.log("addFavouriteCourse", courseId);
@@ -17,6 +20,9 @@ const FavouritesProvider = (props) => {
       favouriteCourses.filter((favouritecourse) => favouritecourse !== courseId)
     );
   };
+  const changeVideoUrl = (newVideoUrl) => {
+    setCurrentVideoUrl(newVideoUrl);
+  };
 
   return (
     <FavouritesContext.Provider
@@ -25,6 +31,8 @@ const FavouritesProvider = (props) => {
         setFavouriteCourses,
         addFavouriteCourse,
         removeFavouriteCourse,
+        currentVideoUrl,
+        changeVideoUrl,
       }}
     >
       {props.children}
