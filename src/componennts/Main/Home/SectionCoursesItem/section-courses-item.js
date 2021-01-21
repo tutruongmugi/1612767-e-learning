@@ -23,7 +23,7 @@ function SectionCoursesItem({ item }) {
 
       <View style={styles.text}>
         <Text style={{ color: theme.text }}>
-          {item.title == null ? item.courseTitle : item.title}
+          {item.title == null ? item.courseTitle : item.title.slice(0, 35)}
         </Text>
         <Text style={{ color: theme.darkText }}>
           {item["instructor.user.name"] == null

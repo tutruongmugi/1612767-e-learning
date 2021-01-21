@@ -11,6 +11,7 @@ import { AuthenticationContext } from "../../../provider/authentication-provider
 import { CoursesContext } from "../../../provider/courses-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 function CourseActionsMenuButton({ CourseId }) {
   const [favourite, setFavourite] = useState(false);
@@ -70,6 +71,7 @@ function CourseActionsMenuButton({ CourseId }) {
   const onPressDownload = () => {
     setDownloadStatus(true);
     getCourseDetail(state.token, CourseId);
+    setTimeout(getProcessCoursesFunc(state.token), 3000);
   };
 
   const mergeUsers = async () => {
@@ -113,10 +115,11 @@ function CourseActionsMenuButton({ CourseId }) {
       // }
     } catch (e) {}
   };
+
   const onPressAddToChannel = () => {
-    // getFreeCourses(state.token, CourseId);
-    // setChannel(channel);
-    // startGetFreeCourses();
+    getFreeCourses(state.token, CourseId);
+    setChannel(channel);
+    startGetFreeCourses();
   };
   return (
     <Menu>

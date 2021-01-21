@@ -57,7 +57,7 @@ const initialState = {
 const CoursesProvider = (props) => {
   const [courseState, dispatch] = useReducer(reducer, initialState);
   const getTopNewCourses = () => {
-    GetTopNewCourses(dispatch, 10, 1);
+    GetTopNewCourses(dispatch, 50, 1);
   };
   const getCategory = () => {
     GetCategory(dispatch);
@@ -151,6 +151,9 @@ const CoursesProvider = (props) => {
 
     console.log("new:", courseState.searchHistory);
   };
+  const resetListCoursesBySearchKeywordStatus = () => {
+    dispatch({ type: "GET_LIST_COURSES_BY_SEARCH_KEYWORD_FAILED" });
+  };
 
   return (
     <CoursesContext.Provider
@@ -181,6 +184,7 @@ const CoursesProvider = (props) => {
         getSearchHistory,
         deleteSearchHistory,
         deleteItemHistory,
+        resetListCoursesBySearchKeywordStatus,
       }}
     >
       {props.children}
